@@ -25,8 +25,8 @@ func (c *console) initTime() {
 }
 
 // TODO: Whether enable current level
-func (c *console) isEnableLevel() bool {
-	return c.logLevel >= DEBUG
+func (c *console) isEnableLevel(lev level) bool {
+	return c.logLevel >= lev
 }
 
 //func (c *console) IsEnableColor() bool {
@@ -34,22 +34,22 @@ func (c *console) isEnableLevel() bool {
 //}
 
 func (c *console) Info(value string, args ...interface{}) {
-	if c.isEnableLevel() {
+	if c.isEnableLevel(INFO) {
 		c.OutPutMessage(INFO, fmt.Sprintf(value, args...))
 	}
 }
 func (c *console) Debug(value string, args ...interface{}) {
-	if c.isEnableLevel() {
+	if c.isEnableLevel(INFO) {
 		c.OutPutMessage(DEBUG, fmt.Sprintf(value, args...))
 	}
 }
 func (c *console) Error(value string, args ...interface{}) {
-	if c.isEnableLevel() {
+	if c.isEnableLevel(ERROR) {
 		c.OutPutMessage(ERROR, fmt.Sprintf(value, args...))
 	}
 }
 func (c *console) Warning(value string, args ...interface{}) {
-	if c.isEnableLevel() {
+	if c.isEnableLevel(ERROR) {
 		c.OutPutMessage(WARNING, fmt.Sprintf(value, args...))
 	}
 }
