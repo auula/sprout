@@ -48,13 +48,13 @@ func (c *console) OutPutMessage(model level, v string) {
 func (f *fileLog) OutPutMessage(model level, v string) {
 	switch model.toStr() {
 	case DEBUG.toStr():
-		f.OutPut(DEBUG, v)
+		f.outPut(DEBUG, v)
 	case INFO.toStr():
-		f.OutPut(INFO, v)
+		f.outPut(INFO, v)
 	case WARNING.toStr():
-		f.OutPut(WARNING, v)
+		f.outPut(WARNING, v)
 	case ERROR.toStr():
-		f.OutPut(ERROR, v)
+		f.outPut(ERROR, v)
 	default:
 		// Log Level Type Error
 		// Program automatically set to debug
@@ -64,7 +64,7 @@ func (f *fileLog) OutPutMessage(model level, v string) {
 	}
 }
 
-func (f *fileLog) OutPut(lev level, v string) {
+func (f *fileLog) outPut(lev level, v string) {
 	_, err := f.file.WriteString(fmt.Sprintf(fileFormat, lev.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP), v))
 	_ = f.file.Sync()
 	if err != nil {
