@@ -19,6 +19,13 @@ const (
 	bakPerfix = "log_"
 )
 
+type logFileType int
+
+const (
+	plain logFileType = iota // Common plain Logging file type
+	major                    // Major error logging file type
+)
+
 type fileLog struct {
 	logLevel    level
 	wheError    bool        // Whether enable error log file.
@@ -45,7 +52,7 @@ func (f *fileLog) initErrPtr() (*os.File, error) {
 //	Initialization file pointer
 func (f *fileLog) initFilePtr() (*os.File, error) {
 	savePath := path.Join(f.directory, f.fileName+".log")
-	fmt.Println(savePath)
+	// fmt.Println(savePath)
 	file, e := os.OpenFile(savePath, os.O_CREATE|os.O_APPEND|os.O_RDWR, f.power)
 	// fmt.Printf("3 %T %p \n", file, file)
 	if e != nil {
@@ -72,49 +79,76 @@ func (f *fileLog) checkSize() bool {
 	}
 	return info.Size() >= f.fileMaxSize
 }
-
+func (f *fileLog) checkErrSize() bool {
+	info, e := f.errFile.Stat()
+	if e != nil {
+		return false
+	}
+	return info.Size() >= f.fileMaxSize
+}
 func (f *fileLog) Info(value string, args ...interface{}) {
 	if f.isEnableLevel(INFO) {
 		if f.checkSize() {
 			// division file
-			f.divisionLogFile()
+			f.divisionLogFile(plain)
 		}
-		f.OutPutMessage(INFO, fmt.Sprintf(value, args...))
+		f.outPutMessage(INFO, fmt.Sprintf(value, args...))
 	}
 }
 func (f *fileLog) Debug(value string, args ...interface{}) {
 	if f.isEnableLevel(DEBUG) {
 		if f.checkSize() {
 			// division file
-			f.divisionLogFile()
+			f.divisionLogFile(plain)
 		}
-		f.OutPutMessage(DEBUG, fmt.Sprintf(value, args...))
+		f.outPutMessage(DEBUG, fmt.Sprintf(value, args...))
 	}
 }
 func (f *fileLog) Error(value string, args ...interface{}) {
 	if f.isEnableLevel(ERROR) {
 		if f.checkSize() {
 			// division file
-			f.divisionLogFile()
+			f.divisionLogFile(plain)
 		}
-		f.OutPutMessage(ERROR, fmt.Sprintf(value, args...))
+		// 检测error独立文件输出开关是否开启 如果开启就往error独立文件输出内容
+		if f.isEnableErr() {
+			if f.checkErrSize() {
+				// division error file
+				f.divisionLogFile(major)
+			}
+			f.outPutErrMessage(ERROR, fmt.Sprintf(value, args...))
+		}
+		f.outPutMessage(ERROR, fmt.Sprintf(value, args...))
 	}
 }
 func (f *fileLog) Warning(value string, args ...interface{}) {
 	if f.isEnableLevel(WARNING) {
 		if f.checkSize() {
 			// division file
-			f.divisionLogFile()
+			f.divisionLogFile(plain)
 		}
-		f.OutPutMessage(WARNING, fmt.Sprintf(value, args...))
+
+		f.outPutMessage(WARNING, fmt.Sprintf(value, args...))
 	}
 }
 
 // Division logging file.
-func (f *fileLog) divisionLogFile() {
-	_ = f.file.Close()
-	srcPath := path.Join(f.directory, f.fileName+suffix)
-	newPath := path.Join(f.directory, bakPerfix+f.tz.NowTimeStrLogName()+bakSuffix)
-	_ = os.Rename(srcPath, newPath)
-	f.file, _ = f.initFilePtr()
+func (f *fileLog) divisionLogFile(fileType logFileType) {
+	switch fileType {
+	case plain:
+		_ = f.file.Close()
+		srcPath := path.Join(f.directory, f.fileName+suffix)
+		newPath := path.Join(f.directory, bakPerfix+f.tz.NowTimeStrLogName()+bakSuffix)
+		_ = os.Rename(srcPath, newPath)
+		f.file, _ = f.initFilePtr()
+	case major:
+		_ = f.errFile.Close()
+		srcPath := path.Join(f.directory, errPerfix+f.fileName+suffix)
+		newPath := path.Join(f.directory, errPerfix+f.tz.NowTimeStrLogName()+bakSuffix)
+		_ = os.Rename(srcPath, newPath)
+		f.errFile, _ = f.initErrPtr()
+	default:
+		f.Error("division log file fail. Type: %v", fileType)
+	}
+
 }

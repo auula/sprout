@@ -18,10 +18,11 @@ const (
 
 // Logging record
 type logRecord interface {
-	OutPutMessage(v string)
+	outPutMessage(v string) // Record logging msg.
+	outPutErrMessage(v string)
 }
 
-func (c *console) OutPutMessage(model level, v string) {
+func (c *console) outPutMessage(model level, v string) {
 	switch model.toStr() {
 	case DEBUG.toStr():
 		// blue color of log message.
@@ -41,11 +42,11 @@ func (c *console) OutPutMessage(model level, v string) {
 		color.Red("-----------------------------------------------------------------")
 		c.logLevel = DEBUG
 		// recursion
-		c.OutPutMessage(model, v)
+		c.outPutMessage(model, v)
 	}
 }
 
-func (f *fileLog) OutPutMessage(model level, v string) {
+func (f *fileLog) outPutMessage(model level, v string) {
 	switch model.toStr() {
 	case DEBUG.toStr():
 		f.outPut(DEBUG, v)
@@ -59,8 +60,9 @@ func (f *fileLog) OutPutMessage(model level, v string) {
 		// Log Level Type Error
 		// Program automatically set to debug
 		f.logLevel = DEBUG
+		f.Error("Log Level Type Error! Program automatically set to debug!!!")
 		// recursion
-		f.OutPutMessage(model, v)
+		f.outPutMessage(model, v)
 	}
 }
 
@@ -72,5 +74,13 @@ func (f *fileLog) outPut(lev level, v string) {
 		panic("output message to log file fail. filePath:" + f.directory + "/" + f.fileName + ".log")
 	}
 	//fmt.Println(n)
+}
 
+func (f *fileLog) outPutErrMessage(model level, v string) {
+	_, err := f.file.WriteString(fmt.Sprintf(fileFormat, model.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP), v))
+	_ = f.file.Sync()
+	if err != nil {
+		_ = f.file.Close()
+		panic("output message to log file fail. filePath:" + f.directory + "/" + f.fileName + ".log")
+	}
 }

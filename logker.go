@@ -35,6 +35,7 @@ func NewClog(lev level, zone logTimeZone) Logger {
 	return consoleLog
 }
 
+// Build File logger
 func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode) Logger {
 	fg := &fileLog{
 		logLevel:    lev,
@@ -49,6 +50,7 @@ func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName stri
 		fileMaxSize: size,
 	}
 	fg.file, _ = fg.initFilePtr()
+	fg.errFile, _ = fg.initErrPtr()
 	fg.tz = &timeZone{TimeZoneStr: fg.timeZone}
 	return fg
 }
