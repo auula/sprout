@@ -17,18 +17,18 @@ type LogRecord interface {
 	OutPutMessage(v string)
 }
 
-func (c *console) OutPutMessage(model Level, v string) {
-	switch model.ToStr() {
-	case DEBUG.ToStr():
+func (c *console) OutPutMessage(model level, v string) {
+	switch model.toStr() {
+	case DEBUG.toStr():
 		// blue color of log message.
 		// format log message output console.
-		color.Blue(FORMAT, DEBUG.ToStr(), c.tz.NowTimeStr(), BuildCallerStr(SKIP), v)
-	case INFO.ToStr():
-		color.Green(FORMAT, INFO.ToStr(), c.tz.NowTimeStr(), BuildCallerStr(SKIP), v)
-	case WARNING.ToStr():
-		color.Yellow(FORMAT, WARNING.ToStr(), c.tz.NowTimeStr(), BuildCallerStr(SKIP), v)
-	case ERROR.ToStr():
-		color.Red(FORMAT, ERROR.ToStr(), c.tz.NowTimeStr(), BuildCallerStr(SKIP), v)
+		color.Blue(FORMAT, DEBUG.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
+	case INFO.toStr():
+		color.Green(FORMAT, INFO.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
+	case WARNING.toStr():
+		color.Yellow(FORMAT, WARNING.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
+	case ERROR.toStr():
+		color.Red(FORMAT, ERROR.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
 	default:
 		// Log Level Type Error
 		// Program automatically set to debug

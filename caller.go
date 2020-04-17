@@ -16,7 +16,7 @@ const (
 	SKIP = 3
 )
 
-func BuildCallerStr(skip int) string {
+func buildCallerStr(skip int) string {
 	pc, file, line, ok := runtime.Caller(skip)
 	if !ok {
 		panic("error runtime caller.")

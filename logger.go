@@ -7,10 +7,10 @@ package logker
 import "fmt"
 
 // Custom logging level type.
-type Level int
+type level int
 
 const (
-	DEBUG Level = iota
+	DEBUG level = iota
 	INFO
 	WARNING
 	ERROR
@@ -23,8 +23,7 @@ const (
 	GB1   int64 = 10 * MB100
 )
 
-type Log Logger
-
+// Type Log Logger
 // Logger interface.
 // Abstract Logger object.
 type Logger interface {
@@ -39,7 +38,7 @@ type Logger interface {
 }
 
 // TODO: Logging level to string
-func (lev Level) ToStr() string {
+func (lev level) toStr() string {
 	switch lev {
 	case DEBUG:
 		return "DEBUG"

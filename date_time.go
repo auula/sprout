@@ -42,7 +42,7 @@ const (
 )
 
 // 自定义时间类型 ：customize time zone type struct
-type TimeZone struct {
+type timeZone struct {
 	TimeZoneStr LogTimeZone // your custom time zone,recommend use this.
 }
 
