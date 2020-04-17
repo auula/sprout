@@ -26,6 +26,6 @@ func Test_fileLog_outPut(t *testing.T) {
 	flog.power = 0666
 	flog.timeZone = Shanghai
 	flog.tz = &timeZone{TimeZoneStr: flog.timeZone}
-	flog.outPut(DEBUG, "testetstststtststs")
+	flog.OutPut(DEBUG, "testetstststtststs")
 
 }
