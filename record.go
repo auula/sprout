@@ -48,13 +48,13 @@ func (c *console) OutPutMessage(model level, v string) {
 func (f *fileLog) OutPutMessage(model level, v string) {
 	switch model.toStr() {
 	case DEBUG.toStr():
-		f.outPut(DEBUG, v)
+		f.OutPut(DEBUG, v)
 	case INFO.toStr():
-		f.outPut(INFO, v)
+		f.OutPut(INFO, v)
 	case WARNING.toStr():
-		f.outPut(WARNING, v)
+		f.OutPut(WARNING, v)
 	case ERROR.toStr():
-		f.outPut(ERROR, v)
+		f.OutPut(ERROR, v)
 	default:
 		// Log Level Type Error
 		// Program automatically set to debug
