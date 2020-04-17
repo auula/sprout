@@ -65,11 +65,11 @@ func (f *fileLog) OutPutMessage(model level, v string) {
 }
 
 func (f *fileLog) outPut(lev level, v string) {
-	_, err := f.file.WriteString(fmt.Sprintf(fileFormat, lev.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP), v))
+	n, err := f.file.WriteString(fmt.Sprintf(fileFormat, lev.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP), v))
+	_ = f.file.Sync()
 	if err != nil {
-
-		panic("output message to log file fail. filePath:" + f.directory + "/" + f.fileName)
-
+		panic("output message to log file fail. filePath:" + f.directory + "/" + f.fileName + ".log")
 	}
+	fmt.Println(n)
 
 }
