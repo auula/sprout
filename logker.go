@@ -35,8 +35,8 @@ func NewClog(lev level, zone logTimeZone) Logger {
 	return consoleLog
 }
 
-func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, power os.FileMode) Logger {
-	fileLog := &fileLog{
+func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, power os.FileMode) *fileLog {
+	fg := &fileLog{
 		logLevel:  lev,
 		wheError:  false,
 		directory: dir,
@@ -47,6 +47,6 @@ func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName stri
 		timeZone:  zone,
 		power:     power,
 	}
-	fileLog.file, _ = fileLog.initFilePtr()
-	return fileLog
+	fg.file, _ = fileLog.initFilePtr()
+	return fg
 }
