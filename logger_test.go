@@ -11,10 +11,10 @@ import (
 )
 
 func TestLevel_ToStr(t *testing.T) {
-	fmt.Println(DEBUG.ToStr())
-	fmt.Println(INFO.ToStr())
-	fmt.Println(WARNING.ToStr())
-	fmt.Println(ERROR.ToStr())
+	fmt.Println(DEBUG.toStr())
+	fmt.Println(INFO.toStr())
+	fmt.Println(WARNING.toStr())
+	fmt.Println(ERROR.toStr())
 }
 func TestMB(t *testing.T) {
 	fmt.Println(MB10)

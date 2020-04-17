@@ -67,10 +67,12 @@ func (f *fileLog) OutPutMessage(model level, v string) {
 func (f *fileLog) outPut(lev level, v string) error {
 	_, err := f.file.WriteString(fmt.Sprintf(fileFormat, lev.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP), v))
 	if err != nil {
-		// 尝试恢复一次 如果还是直接就panic
+		// 尝试恢复一次 如果还是失败 直接就panic
 		newErr := f.outPut(lev, v)
 		if newErr != nil {
 			panic("output message to log file fail. filePath:" + f.directory + "/" + f.fileName)
+		} else {
+			return nil
 		}
 		return err
 	}
