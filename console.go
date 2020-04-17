@@ -26,7 +26,8 @@ func (c *console) initTime() {
 
 // TODO: Whether enable current level
 func (c *console) isEnableLevel(lev level) bool {
-	return c.logLevel >= lev
+	// debug<info<warn<Error
+	return c.logLevel <= lev
 }
 
 //func (c *console) IsEnableColor() bool {
