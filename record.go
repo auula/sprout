@@ -48,13 +48,13 @@ func (c *console) OutPutMessage(model level, v string) {
 func (f *fileLog) OutPutMessage(model level, v string) {
 	switch model.toStr() {
 	case DEBUG.toStr():
-		_ = f.outPut(DEBUG, v)
+		f.outPut(DEBUG, v)
 	case INFO.toStr():
-		_ = f.outPut(INFO, v)
+		f.outPut(INFO, v)
 	case WARNING.toStr():
-		_ = f.outPut(WARNING, v)
+		f.outPut(WARNING, v)
 	case ERROR.toStr():
-		_ = f.outPut(ERROR, v)
+		f.outPut(ERROR, v)
 	default:
 		// Log Level Type Error
 		// Program automatically set to debug
@@ -64,17 +64,12 @@ func (f *fileLog) OutPutMessage(model level, v string) {
 	}
 }
 
-func (f *fileLog) outPut(lev level, v string) error {
+func (f *fileLog) outPut(lev level, v string) {
 	_, err := f.file.WriteString(fmt.Sprintf(fileFormat, lev.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP), v))
 	if err != nil {
-		// 尝试恢复一次 如果还是失败 直接就panic
-		newErr := f.outPut(lev, v)
-		if newErr != nil {
-			panic("output message to log file fail. filePath:" + f.directory + "/" + f.fileName)
-		} else {
-			return nil
-		}
-		return err
+
+		panic("output message to log file fail. filePath:" + f.directory + "/" + f.fileName)
+
 	}
-	return nil
+
 }
