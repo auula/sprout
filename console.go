@@ -10,18 +10,18 @@ import "fmt"
 // console Logger
 type console struct {
 	// Logging level
-	logLevel Level
+	logLevel level
 	// set running Time Zone
-	timeZone LogTimeZone
+	timeZone logTimeZone
 	// customize of time zone type
-	tz *TimeZone
+	tz *timeZone
 	// Whether enable console color
 	// code : WheColor bool
 }
 
 func (c *console) initTime() {
 	// set customize time zone
-	c.tz = &TimeZone{TimeZoneStr: c.timeZone}
+	c.tz = &timeZone{TimeZoneStr: c.timeZone}
 }
 
 // TODO: Whether enable current level
