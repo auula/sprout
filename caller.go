@@ -7,6 +7,7 @@ package logker
 
 import (
 	"fmt"
+	"path"
 	"runtime"
 )
 
@@ -23,7 +24,7 @@ func BuildCallerStr(skip int) string {
 	// get function name
 	funName := runtime.FuncForPC(pc).Name()
 	// file path
-	//filePath := path.Base(file)
+	filePath := path.Base(file)
 	// build string runtime caller info
-	return fmt.Sprintf("%s|%s:%d", file, funName, line)
+	return fmt.Sprintf("%s|%s:%d", filePath, funName, line)
 }
