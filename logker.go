@@ -35,7 +35,7 @@ func NewClog(lev level, zone logTimeZone) Logger {
 	return consoleLog
 }
 
-func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode) *fileLog {
+func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode) Logger {
 	fg := &fileLog{
 		logLevel:    lev,
 		wheError:    false,
