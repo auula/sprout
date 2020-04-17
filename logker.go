@@ -3,6 +3,8 @@
 // Author: higker <deen.job@qq.com>
 package logker
 
+import "os"
+
 /*
  ____ ____ ____ ____ ____ ____
 ||L |||o |||g |||K |||e |||r ||
@@ -31,4 +33,20 @@ func NewClog(lev level, zone logTimeZone) Logger {
 	}
 	consoleLog.initTime()
 	return consoleLog
+}
+
+func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, power os.FileMode) Logger {
+	fileLog := &fileLog{
+		logLevel:  lev,
+		wheError:  false,
+		directory: "/Users/ding/Documents/GO_CODE_DEV/src/logker",
+		fileName:  "/log",
+		file:      nil,
+		errFile:   nil,
+		tz:        nil,
+		timeZone:  zone,
+		power:     power,
+	}
+	fileLog.file, _ = fileLog.initFilePtr()
+	return fileLog
 }
