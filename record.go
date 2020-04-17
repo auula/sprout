@@ -55,6 +55,7 @@ func (f *fileLog) outPutMessage(model level, v string) {
 	case WARNING.toStr():
 		f.outPut(WARNING, v)
 	case ERROR.toStr():
+		f.outPutErr(ERROR, v)
 		f.outPut(ERROR, v)
 	default:
 		// Log Level Type Error
