@@ -9,7 +9,7 @@ import "github.com/fatih/color"
 
 const (
 	//[INFO] 2006-01-02 13:05.0006 MP - Position: test.go|main.test:21 - Message: news
-	FORMAT = "[%s] - Date: %s - Position: %s - Message: %s"
+	FORMAT = "[%s] - Date: %s  %s - Message: %s"
 )
 
 // Logging record
