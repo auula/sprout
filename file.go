@@ -112,10 +112,13 @@ func (f *fileLog) Error(value string, args ...interface{}) {
 		}
 		// 检测error独立文件输出开关是否开启 如果开启就往error独立文件输出内容
 		if f.isEnableErr() {
+			fmt.Println("1进来了", f.wheError)
 			if f.checkErrSize() {
+				fmt.Println("2进来了", f.wheError)
 				// division error file
 				f.divisionLogFile(major)
 			}
+			fmt.Println("4进来了", f.wheError)
 			f.outPutErrMessage(ERROR, fmt.Sprintf(value, args...))
 		}
 		f.outPutMessage(ERROR, fmt.Sprintf(value, args...))
@@ -142,6 +145,7 @@ func (f *fileLog) divisionLogFile(fileType logFileType) {
 		_ = os.Rename(srcPath, newPath)
 		f.file, _ = f.initFilePtr()
 	case major:
+		fmt.Println("3进来了", f.wheError)
 		_ = f.errFile.Close()
 		srcPath := path.Join(f.directory, errPerfix+f.fileName+suffix)
 		newPath := path.Join(f.directory, errPerfix+f.tz.NowTimeStrLogName()+bakSuffix)
