@@ -12,6 +12,13 @@ import (
 	"path"
 )
 
+const (
+	errPerfix = "error_"
+	suffix    = ".log"
+	bakSuffix = "_bak.log"
+	bakPerfix = "log_"
+)
+
 type fileLog struct {
 	logLevel    level
 	wheError    bool        // Whether enable error log file.
@@ -27,7 +34,7 @@ type fileLog struct {
 
 // Initialization error file pointer
 func (f *fileLog) initErrPtr() (*os.File, error) {
-	savePath := path.Join(f.directory, "error_"+f.fileName+".log")
+	savePath := path.Join(f.directory, errPerfix+f.fileName+suffix)
 	file, e := os.OpenFile(savePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, f.power)
 	if e == nil {
 		return nil, errors.New("open file fail :" + savePath)
@@ -68,26 +75,46 @@ func (f *fileLog) checkSize() bool {
 
 func (f *fileLog) Info(value string, args ...interface{}) {
 	if f.isEnableLevel(INFO) {
+		if f.checkSize() {
+			// division file
+			f.divisionLogFile()
+		}
 		f.OutPutMessage(INFO, fmt.Sprintf(value, args...))
 	}
 }
 func (f *fileLog) Debug(value string, args ...interface{}) {
 	if f.isEnableLevel(DEBUG) {
+		if f.checkSize() {
+			// division file
+			f.divisionLogFile()
+		}
 		f.OutPutMessage(DEBUG, fmt.Sprintf(value, args...))
 	}
 }
 func (f *fileLog) Error(value string, args ...interface{}) {
 	if f.isEnableLevel(ERROR) {
+		if f.checkSize() {
+			// division file
+			f.divisionLogFile()
+		}
 		f.OutPutMessage(ERROR, fmt.Sprintf(value, args...))
 	}
 }
 func (f *fileLog) Warning(value string, args ...interface{}) {
 	if f.isEnableLevel(WARNING) {
+		if f.checkSize() {
+			// division file
+			f.divisionLogFile()
+		}
 		f.OutPutMessage(WARNING, fmt.Sprintf(value, args...))
 	}
 }
 
 // Division logging file.
-func (f *fileLog) divisionLogFile(srcFile string) {
-	srcFile = "error_xxxxxx.log"
+func (f *fileLog) divisionLogFile() {
+	_ = f.file.Close()
+	srcPath := path.Join(f.directory, f.fileName+suffix)
+	newPath := path.Join(f.directory, bakPerfix+f.tz.NowTimeStrLogName()+bakSuffix)
+	_ = os.Rename(srcPath, newPath)
+	f.file, _ = f.initFilePtr()
 }

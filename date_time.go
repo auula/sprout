@@ -38,7 +38,8 @@ const (
 	Korea     logTimeZone = "Asia/Pyongyang"
 	Shanghai  logTimeZone = "Asia/Shanghai" // Shanghai China
 
-	timeFormat = "2006-01-02 15:04:05.0000 PM"
+	timeFormat    = "2006-01-02 15:04:05.0000 PM"
+	logTimeFormat = "2006_01_02_15_04_05_0000"
 )
 
 // 自定义时间类型 ：customize time zone type struct
@@ -49,6 +50,11 @@ type timeZone struct {
 // get time str fmt: 2006-01-02 15:04:05.0000 PM
 func (tz *timeZone) NowTimeStr() (ts string) {
 	return tz.localTime().Format(timeFormat)
+}
+
+// Log file name format : log_2006_01_02_15_04_05_0000.log
+func (tz *timeZone) NowTimeStrLogName() (ts string) {
+	return tz.localTime().Format(logTimeFormat)
 }
 
 // ret: nanosecond string
