@@ -39,7 +39,7 @@ const (
 	Shanghai  logTimeZone = "Asia/Shanghai" // Shanghai China
 
 	timeFormat    = "2006-01-02 15:04:05.0000 PM"
-	logTimeFormat = "2006_01_02_15_04_05_0000"
+	logTimeFormat = "2006_01_02_15_04_05.0000"
 )
 
 // 自定义时间类型 ：customize time zone type struct
