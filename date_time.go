@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-type LogTimeZone string
+type logTimeZone string
 
 const (
 	//https://blog.imdst.com/guo-bf/
@@ -25,39 +25,39 @@ const (
 	//香港     HongKong    /usr/share/zoneinfo/Asia/Hong_Kong
 	//日本     Japan       /usr/share/zoneinfo/Asia/Tokyo
 	//韩国     Korea       /usr/share/zoneinfo/Asia/Pyongyang
-	EST       LogTimeZone = "EST5EDT"
-	PST       LogTimeZone = "PST8PDT"
-	CST       LogTimeZone = "CST6CDT"
-	GMT       LogTimeZone = "Europe/London"
-	Thailand  LogTimeZone = "Asia/Bangkok"
-	Vietnam   LogTimeZone = "Asia/Ho_Chi_Minh"
-	Singapore LogTimeZone = "Asia/Singapore"
-	Taiwan    LogTimeZone = "Asia/Taipei"
-	HongKong  LogTimeZone = "Asia/Hong_Kong"
-	Japan     LogTimeZone = "Asia/Tokyo"
-	Korea     LogTimeZone = "Asia/Pyongyang"
-	Shanghai  LogTimeZone = "Asia/Shanghai" // Shanghai China
+	EST       logTimeZone = "EST5EDT"
+	PST       logTimeZone = "PST8PDT"
+	CST       logTimeZone = "CST6CDT"
+	GMT       logTimeZone = "Europe/London"
+	Thailand  logTimeZone = "Asia/Bangkok"
+	Vietnam   logTimeZone = "Asia/Ho_Chi_Minh"
+	Singapore logTimeZone = "Asia/Singapore"
+	Taiwan    logTimeZone = "Asia/Taipei"
+	HongKong  logTimeZone = "Asia/Hong_Kong"
+	Japan     logTimeZone = "Asia/Tokyo"
+	Korea     logTimeZone = "Asia/Pyongyang"
+	Shanghai  logTimeZone = "Asia/Shanghai" // Shanghai China
 
 	timeFormat = "2006-01-02 15:04:05.0000 PM"
 )
 
 // 自定义时间类型 ：customize time zone type struct
 type timeZone struct {
-	TimeZoneStr LogTimeZone // your custom time zone,recommend use this.
+	TimeZoneStr logTimeZone // your custom time zone,recommend use this.
 }
 
 // get time str fmt: 2006-01-02 15:04:05.0000 PM
-func (tz *TimeZone) NowTimeStr() (ts string) {
+func (tz *timeZone) NowTimeStr() (ts string) {
 	return tz.localTime().Format(timeFormat)
 }
 
 // ret: nanosecond string
-func (tz *TimeZone) NanoSecondStr() string {
+func (tz *timeZone) NanoSecondStr() string {
 	return strconv.FormatInt(tz.localTime().UnixNano(), 10)
 }
 
 //set customize time zone
-func (tz *TimeZone) localTime() time.Time {
+func (tz *timeZone) localTime() time.Time {
 	//  set time zone
 	ltz, err := time.LoadLocation(string(tz.TimeZoneStr))
 	if err != nil {

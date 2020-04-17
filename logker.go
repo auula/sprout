@@ -10,7 +10,9 @@ package logker
 // Build console Logger
 // Level: logger Level
 // Zone : logger Time Zone
-func NewClog(lev level, zone LogTimeZone) Logger {
+// PS: We privatized some functions, structures and variables.
+// Not affecting normal use. ^_^ Good luck~
+func NewClog(lev level, zone logTimeZone) Logger {
 	consoleLog := &console{
 		logLevel: lev,
 		timeZone: zone,
