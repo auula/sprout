@@ -39,7 +39,7 @@ func (c *console) Info(value string, args ...interface{}) {
 	}
 }
 func (c *console) Debug(value string, args ...interface{}) {
-	if c.isEnableLevel(INFO) {
+	if c.isEnableLevel(DEBUG) {
 		c.OutPutMessage(DEBUG, fmt.Sprintf(value, args...))
 	}
 }
