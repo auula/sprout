@@ -36,7 +36,7 @@ const (
 	HongKong  LogTimeZone = "Asia/Hong_Kong"
 	Japan     LogTimeZone = "Asia/Tokyo"
 	Korea     LogTimeZone = "Asia/Pyongyang"
-	China                 = "Asia/Shanghai" // Shanghai China
+	China     LogTimeZone = "Asia/Shanghai" // Shanghai China
 
 	timeFormat = "2006-01-02 15:04:05.0000 PM"
 )
