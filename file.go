@@ -12,20 +12,31 @@ import (
 )
 
 type fileLog struct {
-	WheError  bool        // Whether enable error log file.
-	Directory string      // Log save directory
-	FileName  string      // Log file name
-	File      *os.File    // Log file  pointer
-	ErrFile   *os.File    // Error file log pointer
+	logLevel  level
+	wheError  bool        // Whether enable error log file.
+	directory string      // Log save directory
+	fileName  string      // Log file name
+	file      *os.File    // Log file  pointer
+	errFile   *os.File    // Error file log pointer
 	tz        *timeZone   // Customize of time zone type
 	timeZone  logTimeZone // Set running Time Zone
-	Power     os.FileMode // File system Power
+	power     os.FileMode // File system Power
 }
 
 // Initialization error file pointer
 func (f *fileLog) initErrPtr() (*os.File, error) {
-	savePath := path.Join(f.Directory, "error_", f.FileName, ".log")
-	file, e := os.OpenFile(savePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, f.Power)
+	savePath := path.Join(f.directory, "error_", f.fileName, ".log")
+	file, e := os.OpenFile(savePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, f.power)
+	if e == nil {
+		return nil, errors.New("open file fail :" + savePath)
+	}
+	return file, nil
+}
+
+//	Initialization file pointer
+func (f *fileLog) initFilePtr() (*os.File, error) {
+	savePath := path.Join(f.directory, f.fileName, ".log")
+	file, e := os.OpenFile(savePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, f.power)
 	if e == nil {
 		return nil, errors.New("open file fail :" + savePath)
 	}
@@ -33,7 +44,7 @@ func (f *fileLog) initErrPtr() (*os.File, error) {
 }
 
 func (f *fileLog) isEnableErr() bool {
-	return f.WheError
+	return f.wheError
 }
 
 func (f *fileLog) Info(value string, args ...interface{}) {

@@ -5,11 +5,15 @@
 
 package logker
 
-import "github.com/fatih/color"
+import (
+	"fmt"
+	"github.com/fatih/color"
+)
 
 const (
 	//[INFO] 2006-01-02 13:05.0006 MP - Position: test.go|main.test:21 - Message: news
-	format = "[%s] - Date: %s  %s - Message: %s"
+	format     = "[%s] - Date: %s  %s - Message: %s"
+	fileFormat = format + "\n"
 )
 
 // Logging record
@@ -38,5 +42,38 @@ func (c *console) OutPutMessage(model level, v string) {
 		c.logLevel = DEBUG
 		// recursion
 		c.OutPutMessage(model, v)
+	}
+}
+
+func (f *fileLog) OutPutMessage(model level, v string) {
+	switch model.toStr() {
+	case DEBUG.toStr():
+		f.outPut(DEBUG, v)
+	case INFO.toStr():
+		f.outPut(INFO, v)
+	case WARNING.toStr():
+		f.outPut(WARNING, v)
+	case ERROR.toStr():
+		f.outPut(ERROR, v)
+	default:
+		// Log Level Type Error
+		// Program automatically set to debug
+		f.logLevel = DEBUG
+		// recursion
+		f.OutPutMessage(model, v)
+	}
+}
+
+func (f *fileLog) outPut(lev level, v string) {
+	_, err := f.file.WriteString(fmt.Sprintf(fileFormat, lev.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP), v))
+	if err != nil {
+		_ = f.file.Close()
+		//if err != nil {
+		//
+		//}
+		for i := 0; i < 1; i++ {
+			f.outPut(lev, v)
+		}
+		//panic("writer message content fail！Open file Program automatically closed.")
 	}
 }
