@@ -65,7 +65,7 @@ func (f *fileLog) OutPutMessage(model level, v string) {
 }
 
 func (f *fileLog) OutPut(lev level, v string) {
-	_, err := f.file.WriteString(fmt.Sprintf(fileFormat, lev.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP), v))
+	_, err := f.file.WriteString(fmt.Sprintf(fileFormat, lev.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP+1), v))
 	_ = f.file.Sync()
 	if err != nil {
 		_ = f.file.Close()
