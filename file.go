@@ -42,7 +42,7 @@ type fileLog struct {
 // Initialization error file pointer
 func (f *fileLog) initErrPtr() (*os.File, error) {
 	savePath := path.Join(f.directory, errPerfix+f.fileName+suffix)
-	file, e := os.OpenFile(savePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, f.power)
+	file, e := os.OpenFile(savePath, os.O_CREATE|os.O_APPEND|os.O_RDWR, f.power)
 	if e == nil {
 		return nil, errors.New("open file fail :" + savePath)
 	}
