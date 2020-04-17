@@ -39,8 +39,8 @@ func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName stri
 	fileLog := &fileLog{
 		logLevel:  lev,
 		wheError:  false,
-		directory: "/Users/ding/Documents/GO_CODE_DEV/src/logker",
-		fileName:  "/log",
+		directory: dir,
+		fileName:  fileName,
 		file:      nil,
 		errFile:   nil,
 		tz:        nil,
