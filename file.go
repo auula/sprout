@@ -7,7 +7,7 @@ package logker
 
 import "os"
 
-type FileLog struct {
+type fileLog struct {
 	WheError  bool     // whether enable error log file.
 	Directory string   // Log save directory
 	FileName  string   // Log file name
@@ -15,19 +15,19 @@ type FileLog struct {
 	ErrFile   *os.File // Error file log pointer
 }
 
-func (f *FileLog) isEnableErr() bool {
+func (f *fileLog) isEnableErr() bool {
 	return f.WheError
 }
 
-func (f *FileLog) Info(value string, args ...interface{}) {
+func (f *fileLog) Info(value string, args ...interface{}) {
 
 }
-func (f *FileLog) Debug(value string, args ...interface{}) {
+func (f *fileLog) Debug(value string, args ...interface{}) {
 
 }
-func (f *FileLog) Error(value string, args ...interface{}) {
+func (f *fileLog) Error(value string, args ...interface{}) {
 
 }
-func (f *FileLog) Warning(value string, args ...interface{}) {
+func (f *fileLog) Warning(value string, args ...interface{}) {
 
 }
