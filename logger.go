@@ -41,13 +41,13 @@ type Logger interface {
 func (lev level) toStr() string {
 	switch lev {
 	case DEBUG:
-		return "DEBUG"
+		return " DEBUG "
 	case INFO:
-		return "INFO"
+		return "  INFO "
 	case WARNING:
 		return "WARNING"
 	case ERROR:
-		return "ERROR"
+		return " ERROR "
 	default:
 		panic("Level to string fail :" + fmt.Sprintf("%d", lev))
 	}

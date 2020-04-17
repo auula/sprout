@@ -11,9 +11,6 @@ import (
 	"path"
 )
 
-//Customize system power
-type Power os.FileMode
-
 type fileLog struct {
 	WheError  bool        // Whether enable error log file.
 	Directory string      // Log save directory
@@ -22,13 +19,13 @@ type fileLog struct {
 	ErrFile   *os.File    // Error file log pointer
 	tz        *timeZone   // Customize of time zone type
 	timeZone  logTimeZone // Set running Time Zone
-	Pw        Power       // File Power
+	Power     os.FileMode // File system Power
 }
 
 // Initialization error file pointer
 func (f *fileLog) initErrPtr() (*os.File, error) {
 	savePath := path.Join(f.Directory, "error_", f.FileName, ".log")
-	file, e := os.OpenFile(savePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, f.Pw)
+	file, e := os.OpenFile(savePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, f.Power)
 	if e == nil {
 		return nil, errors.New("open file fail :" + savePath)
 	}
