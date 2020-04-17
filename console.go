@@ -49,7 +49,7 @@ func (c *console) Error(value string, args ...interface{}) {
 	}
 }
 func (c *console) Warning(value string, args ...interface{}) {
-	if c.isEnableLevel(ERROR) {
+	if c.isEnableLevel(WARNING) {
 		c.OutPutMessage(WARNING, fmt.Sprintf(value, args...))
 	}
 }
