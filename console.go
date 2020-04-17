@@ -35,21 +35,21 @@ func (c *console) isEnableLevel() bool {
 
 func (c *console) Info(value string, args ...interface{}) {
 	if c.isEnableLevel() {
-		c.OutPutMessage(INFO, fmt.Sprintf(value, args))
+		c.OutPutMessage(INFO, fmt.Sprintf(value, args...))
 	}
 }
 func (c *console) Debug(value string, args ...interface{}) {
 	if c.isEnableLevel() {
-		c.OutPutMessage(DEBUG, fmt.Sprintf(value, args))
+		c.OutPutMessage(DEBUG, fmt.Sprintf(value, args...))
 	}
 }
 func (c *console) Error(value string, args ...interface{}) {
 	if c.isEnableLevel() {
-		c.OutPutMessage(ERROR, fmt.Sprintf(value, args))
+		c.OutPutMessage(ERROR, fmt.Sprintf(value, args...))
 	}
 }
 func (c *console) Warning(value string, args ...interface{}) {
 	if c.isEnableLevel() {
-		c.OutPutMessage(WARNING, fmt.Sprintf(value, args))
+		c.OutPutMessage(WARNING, fmt.Sprintf(value, args...))
 	}
 }
