@@ -47,6 +47,6 @@ func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName stri
 		timeZone:  zone,
 		power:     power,
 	}
-	fg.file, _ = fileLog.initFilePtr()
+	fg.file, _ = fg.initFilePtr()
 	return fg
 }
