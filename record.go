@@ -75,9 +75,27 @@ func (f *fileLog) outPut(lev level, v string) {
 	}
 	//fmt.Println(n)
 }
-
 func (f *fileLog) outPutErrMessage(model level, v string) {
-	_, err := f.errFile.WriteString(fmt.Sprintf(fileFormat, model.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP), v))
+	switch model.toStr() {
+	case DEBUG.toStr():
+		f.outPutErr(DEBUG, v)
+	case INFO.toStr():
+		f.outPutErr(INFO, v)
+	case WARNING.toStr():
+		f.outPutErr(WARNING, v)
+	case ERROR.toStr():
+		f.outPutErr(ERROR, v)
+	default:
+		// Log Level Type Error
+		// Program automatically set to debug
+		f.logLevel = DEBUG
+		f.Error("Log Level Type Error! Program automatically set to debug!!!")
+		// recursion
+		f.outPutErrMessage(model, v)
+	}
+}
+func (f *fileLog) outPutErr(model level, v string) {
+	_, err := f.errFile.WriteString(fmt.Sprintf(fileFormat, model.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP+1), v))
 	_ = f.errFile.Sync()
 	if err != nil {
 		_ = f.errFile.Close()
