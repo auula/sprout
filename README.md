@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://github.com/Higker/logker/"><img src="<a href="https://sm.ms/image/9JnSbmkist8dUaC" target="_blank"><img src="https://i.loli.net/2020/04/18/9JnSbmkist8dUaC.png" /></a>" width="128"/></a>
+    <a href="https://github.com/Higker/logker/"><img src="https://i.loli.net/2020/04/18/9JnSbmkist8dUaC.png" width="128"/></a>
     <h1 align="center">LogKer</h1>
 </p>
 <p align="center"><code>
@@ -30,7 +30,8 @@ logker</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
 
 ## Installation
 
-The minimum requirement of Go version is **1.11**.
+🔝 The minimum requirement of Go version is **1.11**.
+🔝 Your project also uses go module!!!
 
 ```bash
 go get github.com/higker/logker v1.0.6
@@ -53,6 +54,10 @@ func main() {
 	// Specify file location! Create folder in advance!!
 	dir := "/Users/ding/Documents/test_log"
 	// New file logger
+	// File Max size : You can also use built-in constants
+	// klog.GB1  	= 1GB
+	// klog.MB10  	= 10MB
+ 	// klog.MB100	= 100MB
 	flog := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777)
 	// Analog output log
 	for {
@@ -101,6 +106,14 @@ func main() {
 ![LogKerGolang](https://i.loli.net/2020/04/18/Jjv82WDsyGtCaEH.png)
 
 ![log,golang,logKer](https://i.loli.net/2020/04/18/mJnvBp7oXwd8KSU.png)
+
+## Thank list🤝
+- fatih (https://github.com/fatih/color)
+- Icon Mafia (Logo & Banner design)
+- When are you? 😜
+
+## Other 
+- `Welcome to submit work order👏`
 
 ## License
 

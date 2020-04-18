@@ -25,21 +25,32 @@ const (
 type logFileType int
 
 const (
-	plain logFileType = iota // Common plain Logging file type
-	major                    // Major error logging file type
+	// Common plain Logging file type
+	plain logFileType = iota
+	// Major error logging file type
+	major
 )
 
 type fileLog struct {
-	logLevel    level
-	wheError    bool        // Whether enable error log file.
-	directory   string      // Log save directory
-	fileName    string      // Log file name
-	file        *os.File    // Log file  pointer
-	errFile     *os.File    // Error file log pointer
-	tz          *timeZone   // Customize of time zone type
-	timeZone    logTimeZone // Set running Time Zone
-	power       os.FileMode // File system Power
-	fileMaxSize int64       // File Max size
+	logLevel level
+	// Whether enable error log file.
+	wheError bool
+	// Log save directory
+	directory string
+	// Log file name
+	fileName string
+	// Log file  pointer
+	file *os.File
+	// Error file log pointer
+	errFile *os.File
+	// Customize of time zone type
+	tz *timeZone
+	// Set running Time Zone
+	timeZone logTimeZone
+	// File system Power
+	power os.FileMode
+	// File Max size
+	fileMaxSize int64
 }
 
 // Initialization error file pointer

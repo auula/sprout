@@ -6,8 +6,10 @@ package logker
 import (
 	"os"
 )
+
 // This is package version
-const Version  = "1.0.6"
+const Version = "1.0.6"
+
 /*
  ____ ____ ____ ____ ____ ____
 ||L |||o |||g |||K |||e |||r ||
@@ -24,13 +26,11 @@ LogKer是Golang语言的日志操作库.
 */
 
 // Build console Logger
-// Level: logger Level
-// Zone : logger Time Zone
-// PS: We privatized some functions, structures and variables.
-// Not affecting normal use. ^_^ Good luck~
 func NewClog(lev level, zone logTimeZone) Logger {
 	consoleLog := &console{
+		// Level: logger Level
 		logLevel: lev,
+		// Zone : logger Time Zone
 		timeZone: zone,
 		tz:       nil,
 	}
@@ -39,25 +39,24 @@ func NewClog(lev level, zone logTimeZone) Logger {
 }
 
 // Build File logger
-// Args note
-// logLevel:    lev,       \\ logging level
-// wheError:    wheErr,    \\ whether enable  error alone file
-// directory:   dir,	   \\ logging file save directory
-// fileName:    fileName,  \\ logging save file name
-// timeZone:    zone,	   \\ load time zone format
-// power:       power,     \\ file system power
-// fileMaxSize: size,      \\ logging alone file max size
 func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode) Logger {
 	fg := &fileLog{
-		logLevel:    lev,
-		wheError:    wheErr,
-		directory:   dir,
-		fileName:    fileName,
-		file:        nil,
-		errFile:     nil,
-		tz:          nil,
-		timeZone:    zone,
-		power:       power,
+		// logLevel:    lev,        logging level
+		logLevel: lev,
+		// wheError:    wheErr,     whether enable  error alone file
+		wheError: wheErr,
+		// directory:   dir,	    logging file save directory
+		directory: dir,
+		// fileName:    fileName,   logging save file name
+		fileName: fileName,
+		file:     nil,
+		errFile:  nil,
+		tz:       nil,
+		// timeZone:    zone,	    load time zone format
+		timeZone: zone,
+		// power:       power,      file system power
+		power: power,
+		// fileMaxSize: size,       logging alone file max size
 		fileMaxSize: size,
 	}
 	fg.tz = &timeZone{TimeZoneStr: fg.timeZone}
