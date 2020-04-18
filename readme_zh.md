@@ -6,14 +6,14 @@
 logker</code> 是一个Golang小型简单易用的日志库.👨‍💻‍</p>
 
 <p align="center">
-    📚<a href="https://github.com/Higker/logker/blob/master/README.md" target="_blank">English</a> | 
+    📚<a href="https://github.com/Higker/logker/blob/master/README.md" target="_blank">English Docs</a> | 
     🤩<a href="https://github.com/Higker/logker/" target="_blank">源代码</a> | 
-    👨‍💻‍ <a href="https://github.com/Higker/logker/releases" target="_blank">发布版本</a> 
+    👨‍💻‍ <a href="https://github.com/Higker/logker/releases" target="_blank">Release版本</a> 
 </p>
 
 ---
 
-## Features
+## 特性&简介🌲
 
 - 支持文件自动备份。
 - 保存到到指定位置。
@@ -76,7 +76,7 @@ func main() {
 // logLevel:    lev,       \\ 日志等级
 // wheError:    wheErr,    \\ 是否开启error级别的日志信息单独输出到一个error_开头文件
 // directory:   dir,	   \\ 日志存储的路径&文件夹
-// fileName:    fileName,  \\  日志的名字 不需要写后缀名
+// fileName:    fileName,  \\ 日志的名字 不需要写后缀名
 // timeZone:    zone,	   \\ 你需要设置的时区 可以使用内置常量  你可以在下面查看文档链接
 // power:       power,     \\ 你的文件系统权限
 // fileMaxSize: size,      \\ 当个日志文件大小
@@ -112,9 +112,9 @@ func main() {
 - When are you? 😜
 
 ## 其他帮助 
-- `Welcome to submit work order👏`
+- `欢迎提交issues👏 不一定能及时处理以为开源项目,我还有其他工作需要做。`
 - `Pkg Docs: `[click to pkg.go.dev](https://pkg.go.dev/github.com/higker/logker?tab=doc)
-## 开源协议
 
+## 开源协议
 This project open source is MIT License
 . See the [LICENSE](LICENSE) file content.
