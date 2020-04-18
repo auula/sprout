@@ -34,11 +34,11 @@ logker</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
 🔝 Your project also uses go module!!!
 
 ```shell script
-go get github.com/higker/logker
+go get github.com/Higker/logker
 ```
 OR
 ```shell script
-go get -u github.com/higker/logker
+go get -u github.com/Higker/logker
 ```
 
 command add `-u` flag to update in the future.
