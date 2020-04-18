@@ -42,6 +42,23 @@ go get -u github.com/higker/logker
 
 运行时也可以添加使用参数 `-u` 来获取更新.
 
+#### PS:如果出现下面👇提示:
+```shell
+$ go get github.com/Higker/logker
+go: github.com/Higker/logker upgrade => v1.0.9
+go get: github.com/Higker/logker@v1.0.9: parsing go.mod:
+        module declares its path as: github.com/higker/logker
+                but was required as: github.com/Higker/logker
+```
+##### 你只需要在你项目的go.mod修改`higker`大小问题即可解决
+```json
+module tets
+
+go 1.14
+
+require github.com/higker/logker v1.0.9 
+
+```
 
 ## 使用演示
 #### 1. File Logger

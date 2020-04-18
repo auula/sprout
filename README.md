@@ -43,6 +43,23 @@ go get -u github.com/higker/logker
 
 command add `-u` flag to update in the future.
 
+#### PS: if A kind of Tips:
+```shell
+$ go get github.com/Higker/logker
+go: github.com/Higker/logker upgrade => v1.0.9
+go get: github.com/Higker/logker@v1.0.9: parsing go.mod:
+        module declares its path as: github.com/higker/logker
+                but was required as: github.com/Higker/logker
+```
+##### You only need to modify the size of 'higker' in go.mod of your project
+```json
+module tets
+
+go 1.14
+
+require github.com/higker/logker v1.0.9 
+
+```
 
 ## Use Example
 #### 1. File Logger
