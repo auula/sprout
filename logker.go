@@ -46,7 +46,7 @@ func NewClog(lev level, zone logTimeZone) Logger {
 // timeZone:    zone,	   \\ load time zone format
 // power:       power,     \\ file system power
 // fileMaxSize: size,      \\ logging alone file max size
-func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode) (Logger, error) {
+func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode) Logger {
 	fg := &fileLog{
 		logLevel:    lev,
 		wheError:    wheErr,
@@ -64,5 +64,5 @@ func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName stri
 	if fg.isEnableErr() {
 		fg.errFile = fg.initErrPtr()
 	}
-	return fg, nil
+	return fg
 }
