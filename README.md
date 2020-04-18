@@ -33,8 +33,12 @@ logker</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
 🔝 The minimum requirement of Go version is **1.11**.
 🔝 Your project also uses go module!!!
 
-```bash
+```shell script
 go get github.com/higker/logker v1.0.6
+```
+OR
+```shell script
+go get -u github.com/higker
 ```
 
 command add `-u` flag to update in the future.
