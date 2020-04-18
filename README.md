@@ -26,7 +26,8 @@ logker</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
 - Four levels of `debug` `info` `error` `warning` are supported.
 - `Future support: The remote computer stores the websoket output🙏.`
 - `The project is constantly maintained and updated. I like 😍A kind of Please click star Thanks♪(･ω･)ﾉ!`
-
+- Is this you?😜
+<img src="http://140.143.237.196/generator/cache/1587226559_792.gif" width="280"/>
 
 ## Installation
 
