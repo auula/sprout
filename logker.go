@@ -3,7 +3,9 @@
 // Author: higker <deen.job@qq.com>
 package logker
 
-import "os"
+import (
+	"os"
+)
 
 /*
  ____ ____ ____ ____ ____ ____
@@ -36,7 +38,15 @@ func NewClog(lev level, zone logTimeZone) Logger {
 }
 
 // Build File logger
-func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode) Logger {
+// Args note
+// logLevel:    lev,       \\ logging level
+// wheError:    wheErr,    \\ whether enable  error alone file
+// directory:   dir,	   \\ logging file save directory
+// fileName:    fileName,  \\ logging save file name
+// timeZone:    zone,	   \\ load time zone format
+// power:       power,     \\ file system power
+// fileMaxSize: size,      \\ logging alone file max size
+func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode) (Logger, error) {
 	fg := &fileLog{
 		logLevel:    lev,
 		wheError:    wheErr,
@@ -49,8 +59,10 @@ func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName stri
 		power:       power,
 		fileMaxSize: size,
 	}
-	fg.file, _ = fg.initFilePtr()
-	fg.errFile, _ = fg.initErrPtr()
 	fg.tz = &timeZone{TimeZoneStr: fg.timeZone}
-	return fg
+	fg.file = fg.initFilePtr()
+	if fg.isEnableErr() {
+		fg.errFile = fg.initErrPtr()
+	}
+	return fg, nil
 }

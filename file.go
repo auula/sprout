@@ -5,8 +5,10 @@
 
 package logker
 
+// file v1.1.6
+// File is the implementation of logger interface.
+
 import (
-	"errors"
 	"fmt"
 	"os"
 	"path"
@@ -19,6 +21,7 @@ const (
 	bakPerfix = "log_"
 )
 
+// customize logging type
 type logFileType int
 
 const (
@@ -40,25 +43,25 @@ type fileLog struct {
 }
 
 // Initialization error file pointer
-func (f *fileLog) initErrPtr() (*os.File, error) {
+func (f *fileLog) initErrPtr() *os.File {
 	savePath := path.Join(f.directory, errPerfix+f.fileName+suffix)
 	file, e := os.OpenFile(savePath, os.O_CREATE|os.O_APPEND|os.O_RDWR, f.power)
-	if e == nil {
-		return nil, errors.New("open file fail :" + savePath)
+	if e != nil {
+		panic("open file fail :" + savePath)
 	}
-	return file, nil
+	return file
 }
 
 //	Initialization file pointer
-func (f *fileLog) initFilePtr() (*os.File, error) {
+func (f *fileLog) initFilePtr() *os.File {
 	savePath := path.Join(f.directory, f.fileName+".log")
 	// fmt.Println(savePath)
 	file, e := os.OpenFile(savePath, os.O_CREATE|os.O_APPEND|os.O_RDWR, f.power)
 	// fmt.Printf("3 %T %p \n", file, file)
 	if e != nil {
-		return nil, errors.New("open file fail :" + savePath)
+		panic("open file fail :" + savePath)
 	}
-	return file, nil
+	return file
 }
 
 func (f *fileLog) isEnableErr() bool {
@@ -110,15 +113,14 @@ func (f *fileLog) Error(value string, args ...interface{}) {
 			// division file
 			f.divisionLogFile(plain)
 		}
-		// 检测error独立文件输出开关是否开启 如果开启就往error独立文件输出内容
+		// zh_CN:	检测error独立文件输出开关是否开启 如果开启就往error独立文件输出内容
+		// usa_EN:	Check whether the error independent file output switch is turned on.
+		// If it is turned on, output the content to the error independent file
 		if f.isEnableErr() {
-			// fmt.Println("1进来了", f.wheError)
 			if f.checkErrSize() {
-				// fmt.Println("2进来了", f.wheError)
 				// division error file
 				f.divisionLogFile(major)
 			}
-			// fmt.Println("4进来了", f.wheError)
 			f.outPutErrMessage(ERROR, fmt.Sprintf(value, args...))
 		}
 		f.outPutMessage(ERROR, fmt.Sprintf(value, args...))
@@ -143,14 +145,13 @@ func (f *fileLog) divisionLogFile(fileType logFileType) {
 		srcPath := path.Join(f.directory, f.fileName+suffix)
 		newPath := path.Join(f.directory, bakPerfix+f.tz.NowTimeStrLogName()+bakSuffix)
 		_ = os.Rename(srcPath, newPath)
-		f.file, _ = f.initFilePtr()
+		f.file = f.initFilePtr()
 	case major:
-		// fmt.Println("3进来了", f.wheError)
 		_ = f.errFile.Close()
 		srcPath := path.Join(f.directory, errPerfix+f.fileName+suffix)
 		newPath := path.Join(f.directory, errPerfix+f.tz.NowTimeStrLogName()+bakSuffix)
 		_ = os.Rename(srcPath, newPath)
-		f.errFile, _ = f.initErrPtr()
+		f.errFile = f.initErrPtr()
 	default:
 		f.Error("division log file fail. Type: %v", fileType)
 	}

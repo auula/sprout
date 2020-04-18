@@ -5,6 +5,9 @@
 
 package logker
 
+// STREAM v1.1.6
+// Format console and file log information.
+// IO read write operation.
 import (
 	"fmt"
 	"github.com/fatih/color"
