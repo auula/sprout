@@ -38,7 +38,7 @@ go get github.com/higker/logker v1.0.6
 ```
 OR
 ```shell script
-go get -u github.com/higker
+go get -u github.com/higker/logker
 ```
 
 command add `-u` flag to update in the future.

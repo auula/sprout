@@ -37,7 +37,7 @@ go get github.com/higker/logker
 ```
 或者
 ```shell script
-go get -u github.com/higker
+go get -u github.com/higker/logker
 ```
 
 运行时也可以添加使用参数 `-u` 来获取更新.
