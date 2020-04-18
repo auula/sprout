@@ -7,7 +7,7 @@ logker</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
 
 <p align="center">
     📚<a href="https://github.com/Higker/logker/blob/master/readme_zh.md" target="_blank">中文说明</a> | 
-    🤩<a href="https://github.com/Higker/logker/" target="_blank">Source Code</a> | 
+    🤩<a href="https://pkg.go.dev/github.com/higker/logker?tab=doc" target="_blank">Pkg.go.dev</a> | 
     👨‍💻‍ <a href="https://github.com/Higker/logker/releases" target="_blank">Release</a> 
 </p>
 

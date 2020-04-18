@@ -7,7 +7,7 @@ logker</code> 是一个Golang小型简单易用的日志库.👨‍💻‍</p>
 
 <p align="center">
     📚<a href="https://github.com/Higker/logker/blob/master/README.md" target="_blank">English Docs</a> | 
-    🤩<a href="https://github.com/Higker/logker/" target="_blank">源代码</a> | 
+    🤩<a href="https://pkg.go.dev/github.com/higker/logker?tab=doc" target="_blank">Pkg.go.dev</a> | 
     👨‍💻‍ <a href="https://github.com/Higker/logker/releases" target="_blank">Release版本</a> 
 </p>
 
@@ -32,8 +32,12 @@ logker</code> 是一个Golang小型简单易用的日志库.👨‍💻‍</p>
 🔝 最底版本要求 Go version  **1.11**.
 🔝 你的包管理必须使用的是go module!!!
 
-```bash
-go get github.com/higker/logker v1.0.6
+```shell script
+go get github.com/higker/logker
+```
+或者
+```shell script
+go get github.com/higker
 ```
 
 运行时也可以添加使用参数 `-u` 来获取更新.
