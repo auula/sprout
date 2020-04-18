@@ -34,7 +34,7 @@ logker</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
 🔝 Your project also uses go module!!!
 
 ```shell script
-go get github.com/higker/logker v1.0.6
+go get github.com/higker/logker
 ```
 OR
 ```shell script
