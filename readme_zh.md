@@ -36,7 +36,7 @@ logker</code> 是一个Golang小型简单易用的日志库.👨‍💻‍</p>
 go get github.com/higker/logker v1.0.6
 ```
 
-command add `-u` flag to update in the future.
+运行时也可以添加使用参数 `-u` 来获取更新.
 
 
 ## 使用演示
