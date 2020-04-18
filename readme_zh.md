@@ -6,7 +6,7 @@
 logker</code> 是一个Golang小型简单易用的日志库.👨‍💻‍</p>
 
 <p align="center">
-    📚<a href="https://github.com/Higker/logker/README.md" target="_blank">English</a> | 
+    📚<a href="https://github.com/Higker/logker/blob/master/README.md" target="_blank">English</a> | 
     🤩<a href="https://github.com/Higker/logker/" target="_blank">源代码</a> | 
     👨‍💻‍ <a href="https://github.com/Higker/logker/releases" target="_blank">发布版本</a> 
 </p>
