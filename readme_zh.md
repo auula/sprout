@@ -79,7 +79,7 @@ func main() {
 // fileName:    fileName,  \\ 日志的名字 不需要写后缀名
 // timeZone:    zone,	   \\ 你需要设置的时区 可以使用内置常量  你可以在下面查看文档链接
 // power:       power,     \\ 你的文件系统权限
-// fileMaxSize: size,      \\ 当个日志文件大小
+// fileMaxSize: size,      \\ 单个日志文件大小
 ```
 
 #### 2. Console Logger
@@ -112,7 +112,8 @@ func main() {
 - When are you? 😜
 
 ## 其他帮助 
-- `欢迎提交issues👏 不一定能及时处理以为开源项目,我还有其他工作需要做。`
+- `欢迎提交issues👏 不一定能及时处理因为开源项目,我还有其他工作需要做。`
+- `欢迎🇨🇳中国区小伙伴加入代码贡献.不对应该会中文交流就可以23333💐`
 - `Pkg Docs: `[click to pkg.go.dev](https://pkg.go.dev/github.com/higker/logker?tab=doc)
 
 ## 开源协议
