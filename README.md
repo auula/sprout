@@ -114,7 +114,7 @@ func main() {
 
 ## Other 
 - `Welcome to submit work order👏`
-
+- `Pkg Docs: `[click to pkg.go.dev](https://pkg.go.dev/github.com/higker/logker?tab=doc)
 ## License
 
 This project open source is MIT License
