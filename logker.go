@@ -36,7 +36,7 @@ func NewClog(lev level, zone logTimeZone, formatting string) Logger {
 		timeZone: zone,
 		tz:       nil,
 		// Log Message Format Card
-		formatting: nil,
+		formatting: "",
 	}
 	consoleLog.formatting = buildFormat(formatting)
 
@@ -65,7 +65,7 @@ func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName stri
 		// fileMaxSize: size,       logging alone file max size
 		fileMaxSize: size,
 		// MessageMatchingCard
-		formatting: nil,
+		formatting: "",
 	}
 	fg.formatting = buildFormat(formatting)
 	fg.tz = &timeZone{TimeZoneStr: fg.timeZone}
