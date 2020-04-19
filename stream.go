@@ -112,7 +112,11 @@ func (f *fileLog) outPutErr(model level, v string) {
 func buildFormat(str string) string {
 	match := []string{"{level}", "{time}", "{position}", "{message}"}
 	for i, mc := range match {
-		if strings.Contains(string(str), mc) && match[i] == mc {
+		//用来检测顺序的
+		if !(match[i] == mc) {
+			panic("你的匹配符顺序不对！！！正确的顺序是: {level} > {time} > {position} > {message}!!!")
+		}
+		if strings.Contains(string(str), mc) {
 			if mc == match[0] {
 				str = strings.Replace(string(str), mc, "[%s]", -1)
 			}
@@ -120,7 +124,6 @@ func buildFormat(str string) string {
 		} else {
 			panic("YourLogMessageFormatIsMissing:" + mc + "Tag!!")
 		}
-
 	}
 	return str
 }
