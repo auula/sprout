@@ -16,7 +16,7 @@ import (
 
 var (
 	//[INFO] 2006-01-02 13:05.0006 MP - Position: test.go|main.test:21 - Message: news
-	format     = "[%s] - Date: %s  %s - Message: %s"
+	format     = "{level} - Date: {time}  {position} - Message: {message}" //This version was modified from v 1.1.0
 	fileFormat = format + "\n"
 )
 
@@ -31,13 +31,17 @@ func (c *console) outPutMessage(model level, v string) {
 	case DEBUG.toStr():
 		// blue color of log message.
 		// format log message output console.
-		color.Blue(c.formatting, DEBUG.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
+		c.replaceMsg(DEBUG, v)
+		color.Blue(c.formatting)
 	case INFO.toStr():
-		color.Green(c.formatting, INFO.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
+		c.replaceMsg(DEBUG, v)
+		color.Green(c.formatting)
 	case WARNING.toStr():
-		color.Yellow(c.formatting, WARNING.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
+		c.replaceMsg(DEBUG, v)
+		color.Yellow(c.formatting)
 	case ERROR.toStr():
-		color.Red(c.formatting, ERROR.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
+		c.replaceMsg(DEBUG, v)
+		color.Red(c.formatting)
 	default:
 		// Log Level Type Error
 		// Program automatically set to debug
@@ -72,7 +76,8 @@ func (f *fileLog) outPutMessage(model level, v string) {
 }
 
 func (f *fileLog) outPut(lev level, v string) {
-	_, err := f.file.WriteString(fmt.Sprintf(f.formatting+"\n", lev.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP+1), v))
+	f.replaceMsg(lev, v)
+	_, err := f.file.WriteString(f.formatting + "\n")
 	_ = f.file.Sync()
 	if err != nil {
 		_ = f.file.Close()
@@ -111,19 +116,25 @@ func (f *fileLog) outPutErr(model level, v string) {
 // repair issues : https://github.com/Higker/logker/issues/1
 func buildFormat(str string) string {
 	match := []string{"{level}", "{time}", "{position}", "{message}"}
-	for i, mc := range match {
-		//用来检测顺序的
-		if !(match[i] == mc) {
-			panic("你的匹配符顺序不对！！！正确的顺序是: {level} > {time} > {position} > {message}!!!")
-		}
-		if strings.Contains(string(str), mc) {
-			if mc == match[0] {
-				str = strings.Replace(string(str), mc, "[%s]", -1)
-			}
-			str = strings.Replace(string(str), mc, "%s", -1)
-		} else {
+	for _, mc := range match {
+		if !strings.Contains(string(str), mc) {
 			panic("YourLogMessageFormatIsMissing:" + mc + "Tag!!")
 		}
 	}
 	return str
+}
+
+// ReplaceOurCustomMessageFormatIdentifier
+// This function was added at 23:50:28 on April 19, 2020 in v1.1.0
+func (c *console) replaceMsg(lev level, v string) {
+	c.formatting = strings.Replace(c.formatting, "{level}", DEBUG.toStr(), -1)
+	c.formatting = strings.Replace(c.formatting, "{time}", c.tz.NowTimeStr(), -1)
+	c.formatting = strings.Replace(c.formatting, "{position}", buildCallerStr(SKIP), -1)
+	c.formatting = strings.Replace(c.formatting, "{message}", v, -1)
+}
+func (f *fileLog) replaceMsg(lev level, v string) {
+	f.formatting = strings.Replace(f.formatting, "{level}", DEBUG.toStr(), -1)
+	f.formatting = strings.Replace(f.formatting, "{time}", f.tz.NowTimeStr(), -1)
+	f.formatting = strings.Replace(f.formatting, "{position}", buildCallerStr(SKIP), -1)
+	f.formatting = strings.Replace(f.formatting, "{message}", v, -1)
 }
