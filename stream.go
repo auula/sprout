@@ -9,7 +9,6 @@ package logker
 // Format console and file log information.
 // IO read write operation.
 import (
-	"fmt"
 	"github.com/fatih/color"
 	"strings"
 )
@@ -76,7 +75,7 @@ func (f *fileLog) outPutMessage(model level, v string) {
 }
 
 func (f *fileLog) outPut(lev level, v string) {
-	f.replaceMsg(lev, v)
+	f.replaceMsg(lev, v, SKIP+2)
 	_, err := f.file.WriteString(f.formatting + "\n")
 	_ = f.file.Sync()
 	if err != nil {
@@ -105,7 +104,8 @@ func (f *fileLog) outPutErrMessage(model level, v string) {
 	}
 }
 func (f *fileLog) outPutErr(model level, v string) {
-	_, err := f.errFile.WriteString(fmt.Sprintf(fileFormat, model.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP+1), v))
+	f.replaceMsg(model, v, SKIP+2)
+	_, err := f.errFile.WriteString(f.formatting + "\n")
 	_ = f.errFile.Sync()
 	if err != nil {
 		_ = f.errFile.Close()
@@ -129,12 +129,15 @@ func buildFormat(str string) string {
 func (c *console) replaceMsg(lev level, v string) {
 	c.formatting = strings.Replace(c.formatting, "{level}", lev.toStr(), -1)
 	c.formatting = strings.Replace(c.formatting, "{time}", c.tz.NowTimeStr(), -1)
-	c.formatting = strings.Replace(c.formatting, "{position}", buildCallerStr(SKIP), -1)
+	c.formatting = strings.Replace(c.formatting, "{position}", buildCallerStr(SKIP+1), -1)
 	c.formatting = strings.Replace(c.formatting, "{message}", v, -1)
 }
-func (f *fileLog) replaceMsg(lev level, v string) {
+func (f *fileLog) replaceMsg(lev level, v string, skip int) {
 	f.formatting = strings.Replace(f.formatting, "{level}", lev.toStr(), -1)
 	f.formatting = strings.Replace(f.formatting, "{time}", f.tz.NowTimeStr(), -1)
-	f.formatting = strings.Replace(f.formatting, "{position}", buildCallerStr(SKIP), -1)
+	f.formatting = strings.Replace(f.formatting, "{position}", buildCallerStr(skip), -1)
 	f.formatting = strings.Replace(f.formatting, "{message}", v, -1)
 }
+
+// 第一次写这么整个的开源项目啊哈哈哈哈 解决了issues 有点激动啊...
+// ds 牛逼 牛逼牛逼 牛逼 牛逼 我要让这端注释运行在使用这个库的人电脑上或者服务器~~~~

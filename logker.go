@@ -38,8 +38,11 @@ func NewClog(lev level, zone logTimeZone, formatting string) Logger {
 		// Log Message Format Card
 		formatting: format,
 	}
-	if len(formatting) > 3 {
+
+	if len(formatting) < 3 {
 		consoleLog.formatting = formatting
+	} else {
+		consoleLog.formatting = buildFormat(formatting)
 	}
 	consoleLog.initTime()
 	return consoleLog
@@ -68,8 +71,11 @@ func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName stri
 		// MessageMatchingCard
 		formatting: fileFormat,
 	}
-	if len(formatting) > 3 {
+	buildFormat(formatting)
+	if len(formatting) < 3 {
 		fg.formatting = formatting
+	} else {
+		fg.formatting = buildFormat(formatting)
 	}
 	fg.tz = &timeZone{TimeZoneStr: fg.timeZone}
 	fg.file = fg.initFilePtr()
