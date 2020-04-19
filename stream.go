@@ -30,17 +30,17 @@ func (c *console) outPutMessage(model level, v string) {
 	case DEBUG.toStr():
 		// blue color of log message.
 		// format log message output console.
-		c.replaceMsg(DEBUG, v)
-		color.Blue(c.formatting + "\n")
+
+		color.Blue(c.replaceMsg(DEBUG, v) + "\n")
 	case INFO.toStr():
 		c.replaceMsg(INFO, v)
-		color.Green(c.formatting + "\n")
+		color.Green(c.replaceMsg(DEBUG, v) + "\n")
 	case WARNING.toStr():
 		c.replaceMsg(WARNING, v)
-		color.Yellow(c.formatting + "\n")
+		color.Yellow(c.replaceMsg(DEBUG, v) + "\n")
 	case ERROR.toStr():
 		c.replaceMsg(ERROR, v)
-		color.Red(c.formatting + "\n")
+		color.Red(c.replaceMsg(DEBUG, v) + "\n")
 	default:
 		// Log Level Type Error
 		// Program automatically set to debug
@@ -75,8 +75,8 @@ func (f *fileLog) outPutMessage(model level, v string) {
 }
 
 func (f *fileLog) outPut(lev level, v string) {
-	f.replaceMsg(lev, v, SKIP+2)
-	_, err := f.file.WriteString(f.formatting + "\n")
+
+	_, err := f.file.WriteString(f.replaceMsg(lev, v, SKIP+2) + "\n")
 	_ = f.file.Sync()
 	if err != nil {
 		_ = f.file.Close()
@@ -104,8 +104,7 @@ func (f *fileLog) outPutErrMessage(model level, v string) {
 	}
 }
 func (f *fileLog) outPutErr(model level, v string) {
-	f.replaceMsg(model, v, SKIP+2)
-	_, err := f.errFile.WriteString(f.formatting + "\n")
+	_, err := f.errFile.WriteString(f.replaceMsg(model, v, SKIP+2) + "\n")
 	_ = f.errFile.Sync()
 	if err != nil {
 		_ = f.errFile.Close()
@@ -126,17 +125,19 @@ func buildFormat(str string) string {
 
 // ReplaceOurCustomMessageFormatIdentifier
 // This function was added at 23:50:28 on April 19, 2020 in v1.1.0
-func (c *console) replaceMsg(lev level, v string) {
-	c.formatting = strings.Replace(c.formatting, "{level}", lev.toStr(), -1)
+func (c *console) replaceMsg(lev level, v string) string {
+	c.formatting = strings.Replace(c.formatting, "{level}", "["+lev.toStr()+"]", -1)
 	c.formatting = strings.Replace(c.formatting, "{time}", c.tz.NowTimeStr(), -1)
 	c.formatting = strings.Replace(c.formatting, "{position}", buildCallerStr(SKIP+1), -1)
 	c.formatting = strings.Replace(c.formatting, "{message}", v, -1)
+	return c.formatting
 }
-func (f *fileLog) replaceMsg(lev level, v string, skip int) {
-	f.formatting = strings.Replace(f.formatting, "{level}", lev.toStr(), -1)
+func (f *fileLog) replaceMsg(lev level, v string, skip int) string {
+	f.formatting = strings.Replace(f.formatting, "{level}", "["+lev.toStr()+"]", -1)
 	f.formatting = strings.Replace(f.formatting, "{time}", f.tz.NowTimeStr(), -1)
 	f.formatting = strings.Replace(f.formatting, "{position}", buildCallerStr(skip), -1)
 	f.formatting = strings.Replace(f.formatting, "{message}", v, -1)
+	return f.formatting
 }
 
 // 第一次写这么整个的开源项目啊哈哈哈哈 解决了issues 有点激动啊...
