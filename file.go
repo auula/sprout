@@ -51,6 +51,8 @@ type fileLog struct {
 	power os.FileMode
 	// File Max size
 	fileMaxSize int64
+	// MessageMatchingCard
+	formatting string
 }
 
 // Initialization error file pointer

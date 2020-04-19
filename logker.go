@@ -8,7 +8,7 @@ import (
 )
 
 // This is package version
-const Version = "1.0.8"
+const Version = "1.1.0"
 
 /*
  ____ ____ ____ ____ ____ ____
@@ -25,21 +25,28 @@ LogKer是Golang语言的日志操作库.
 
 */
 
+//type Formatting string
+
 // Build console Logger
-func NewClog(lev level, zone logTimeZone) Logger {
+func NewClog(lev level, zone logTimeZone, formatting string) Logger {
 	consoleLog := &console{
 		// Level: logger Level
 		logLevel: lev,
 		// Zone : logger Time Zone
 		timeZone: zone,
 		tz:       nil,
+		// Log Message Format Card
+		formatting: format,
+	}
+	if len(formatting) > 3 {
+		consoleLog.formatting = formatting
 	}
 	consoleLog.initTime()
 	return consoleLog
 }
 
 // Build File logger
-func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode) Logger {
+func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode, formatting string) Logger {
 	fg := &fileLog{
 		// logLevel:    lev,        logging level
 		logLevel: lev,
@@ -58,6 +65,11 @@ func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName stri
 		power: power,
 		// fileMaxSize: size,       logging alone file max size
 		fileMaxSize: size,
+		// MessageMatchingCard
+		formatting: fileFormat,
+	}
+	if len(formatting) > 3 {
+		fg.formatting = formatting
 	}
 	fg.tz = &timeZone{TimeZoneStr: fg.timeZone}
 	fg.file = fg.initFilePtr()

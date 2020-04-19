@@ -17,6 +17,8 @@ type console struct {
 	tz *timeZone
 	// Whether enable console color
 	// code : WheColor bool
+	// MessageMatchingCard
+	formatting string
 }
 
 func (c *console) initTime() {

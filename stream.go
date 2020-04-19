@@ -11,9 +11,10 @@ package logker
 import (
 	"fmt"
 	"github.com/fatih/color"
+	"strings"
 )
 
-const (
+var (
 	//[INFO] 2006-01-02 13:05.0006 MP - Position: test.go|main.test:21 - Message: news
 	format     = "[%s] - Date: %s  %s - Message: %s"
 	fileFormat = format + "\n"
@@ -30,13 +31,13 @@ func (c *console) outPutMessage(model level, v string) {
 	case DEBUG.toStr():
 		// blue color of log message.
 		// format log message output console.
-		color.Blue(format, DEBUG.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
+		color.Blue(c.formatting, DEBUG.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
 	case INFO.toStr():
-		color.Green(format, INFO.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
+		color.Green(c.formatting, INFO.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
 	case WARNING.toStr():
-		color.Yellow(format, WARNING.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
+		color.Yellow(c.formatting, WARNING.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
 	case ERROR.toStr():
-		color.Red(format, ERROR.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
+		color.Red(c.formatting, ERROR.toStr(), c.tz.NowTimeStr(), buildCallerStr(SKIP), v)
 	default:
 		// Log Level Type Error
 		// Program automatically set to debug
@@ -71,7 +72,7 @@ func (f *fileLog) outPutMessage(model level, v string) {
 }
 
 func (f *fileLog) outPut(lev level, v string) {
-	_, err := f.file.WriteString(fmt.Sprintf(fileFormat, lev.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP+1), v))
+	_, err := f.file.WriteString(fmt.Sprintf(f.formatting+"\n", lev.toStr(), f.tz.NowTimeStr(), buildCallerStr(SKIP+1), v))
 	_ = f.file.Sync()
 	if err != nil {
 		_ = f.file.Close()
@@ -105,4 +106,21 @@ func (f *fileLog) outPutErr(model level, v string) {
 		_ = f.errFile.Close()
 		panic("output message to log file fail. filePath:" + f.directory + "/" + f.fileName + ".log")
 	}
+}
+
+// repair issues : https://github.com/Higker/logker/issues/1
+func buildFormat(str string) string {
+	match := []string{"{level}", "{time}", "{position}", "{message}"}
+	for i, mc := range match {
+		if strings.Contains(string(str), mc) && match[i] == mc {
+			if mc == match[0] {
+				str = strings.Replace(string(str), mc, "[%s]", -1)
+			}
+			str = strings.Replace(string(str), mc, "%s", -1)
+		} else {
+			panic("YourLogMessageFormatIsMissing:" + mc + "Tag!!")
+		}
+
+	}
+	return str
 }
