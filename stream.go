@@ -31,16 +31,16 @@ func (c *console) outPutMessage(model level, v string) {
 		// blue color of log message.
 		// format log message output console.
 		c.replaceMsg(DEBUG, v)
-		color.Blue(c.formatting)
+		color.Blue(c.formatting + "\n")
 	case INFO.toStr():
-		c.replaceMsg(DEBUG, v)
-		color.Green(c.formatting)
+		c.replaceMsg(INFO, v)
+		color.Green(c.formatting + "\n")
 	case WARNING.toStr():
-		c.replaceMsg(DEBUG, v)
-		color.Yellow(c.formatting)
+		c.replaceMsg(WARNING, v)
+		color.Yellow(c.formatting + "\n")
 	case ERROR.toStr():
-		c.replaceMsg(DEBUG, v)
-		color.Red(c.formatting)
+		c.replaceMsg(ERROR, v)
+		color.Red(c.formatting + "\n")
 	default:
 		// Log Level Type Error
 		// Program automatically set to debug

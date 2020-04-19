@@ -27,5 +27,5 @@ func buildCallerStr(skip int) string {
 	filePath := path.Base(file)
 	// build string runtime caller info
 	//return fmt.Sprintf("- Pc:%d - Position: %s|%s:%d", pc, filePath, funName, line)
-	return fmt.Sprintf("- Position: %s|%s:%d", filePath, funName, line)
+	return fmt.Sprintf("%s|%s:%d", filePath, funName, line)
 }
