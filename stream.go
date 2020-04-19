@@ -127,13 +127,13 @@ func buildFormat(str string) string {
 // ReplaceOurCustomMessageFormatIdentifier
 // This function was added at 23:50:28 on April 19, 2020 in v1.1.0
 func (c *console) replaceMsg(lev level, v string) {
-	c.formatting = strings.Replace(c.formatting, "{level}", DEBUG.toStr(), -1)
+	c.formatting = strings.Replace(c.formatting, "{level}", lev.toStr(), -1)
 	c.formatting = strings.Replace(c.formatting, "{time}", c.tz.NowTimeStr(), -1)
 	c.formatting = strings.Replace(c.formatting, "{position}", buildCallerStr(SKIP), -1)
 	c.formatting = strings.Replace(c.formatting, "{message}", v, -1)
 }
 func (f *fileLog) replaceMsg(lev level, v string) {
-	f.formatting = strings.Replace(f.formatting, "{level}", DEBUG.toStr(), -1)
+	f.formatting = strings.Replace(f.formatting, "{level}", lev.toStr(), -1)
 	f.formatting = strings.Replace(f.formatting, "{time}", f.tz.NowTimeStr(), -1)
 	f.formatting = strings.Replace(f.formatting, "{position}", buildCallerStr(SKIP), -1)
 	f.formatting = strings.Replace(f.formatting, "{message}", v, -1)
