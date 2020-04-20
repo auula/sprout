@@ -84,7 +84,8 @@ func main() {
 	// klog.GB1  	= 1GB
 	// klog.MB10  	= 10MB
  	// klog.MB100	= 100MB
-	flog := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777)
+	format := "{level} - DATE {time}  - POS {position} - MSG {message}" //This version was modified from v 1.1.5
+	flog := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777,format)
 	// Analog output log
 	for {
 		flog.Debug("DEBUG : %d + %d = %d",1,2,1+2)
@@ -94,6 +95,7 @@ func main() {
 		time.Sleep(2 * time.Second)
 	}
 }
+
 ```
 > 👆Parameter note List:
 ```go
@@ -107,6 +109,13 @@ func main() {
 // timeZone:    zone,	   \\ load time zone format
 // power:       power,     \\ file system power
 // fileMaxSize: size,      \\ logging alone file max size
+// format :
+	// Now upgrade to version v 1.1.5 to customize the message output format ~
+	// TheCustomTagNameMustBe {level} {time} {position} {message}
+	// The location of the custom label is the location
+	// where the program outputs the corresponding log message at run time！！！！
+	// forExampleHereIsMyCustom
+	// 1. //format := "{level} - {time} - {position} - {message}"
 ```
 
 #### 2. Console Logger
