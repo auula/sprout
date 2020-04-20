@@ -143,6 +143,14 @@ func main() {
 	log.Error("ERROR")
 }
 ```
+## OutPut
+```shell
+[ DEBUG ] - 时间 2020-04-20 11:57:23.8927  - 位置 main.go|main.main:23 - 消息 DEBUG 自定义日志消息匹配符测试
+[  INFO ] - 时间 2020-04-20 11:57:23.8928  - 位置 main.go|main.main:24 - 消息 &{0 Asia/Shanghai 0xc00008e220 {level} - 时间 {t位置 {position} - 消息 {message}}
+[WARNING] - 时间 2020-04-20 11:57:23.8928  - 位置 main.go|main.main:25 - 消息 Asia/Shanghai
+[ ERROR ] - 时间 2020-04-20 11:57:23.8929  - 位置 main.go|main.main:26 - 消息 ERROR
+
+```
 #### 3. 演示截图:
 > 截图没有更新~ 当前截图为 v1.0.9 version,你可以自己安装库使用查看效果,当然可能是新版本的牛逼一点2333333
 ![LogKerGolang](https://i.loli.net/2020/04/18/Jjv82WDsyGtCaEH.png)
