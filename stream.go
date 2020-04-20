@@ -14,7 +14,12 @@ import (
 )
 
 var (
-	//[INFO] 2006-01-02 13:05.0006 MP - Position: test.go|main.test:21 - Message: news
+	// Log message format wildcards
+	// {level} == logging level
+	// {time} == time
+	// {position} == runtime caller info
+	// {message} == logging message
+	// OutPut: [INFO] 2006-01-02 13:05.0006 MP - Position: test.go|main.test:21 - Message: news
 	Format = "{level} - Date: {time}  {position} - Message: {message}" //This was modified for v 1.1.4
 
 )
@@ -30,17 +35,13 @@ func (c *console) outPutMessage(model level, v string) {
 	case DEBUG.toStr():
 		// blue color of log message.
 		// format log message output console.
-
 		color.Blue(c.replaceMsg(DEBUG, v) + "\n")
 	case INFO.toStr():
-		c.replaceMsg(INFO, v)
-		color.Green(c.replaceMsg(DEBUG, v) + "\n")
+		color.Green(c.replaceMsg(INFO, v) + "\n")
 	case WARNING.toStr():
-		c.replaceMsg(WARNING, v)
-		color.Yellow(c.replaceMsg(DEBUG, v) + "\n")
+		color.Yellow(c.replaceMsg(WARNING, v) + "\n")
 	case ERROR.toStr():
-		c.replaceMsg(ERROR, v)
-		color.Red(c.replaceMsg(DEBUG, v) + "\n")
+		color.Red(c.replaceMsg(ERROR, v) + "\n")
 	default:
 		// Log Level Type Error
 		// Program automatically set to debug
@@ -124,7 +125,7 @@ func buildFormat(str string) string {
 }
 
 // ReplaceOurCustomMessageFormatIdentifier
-// This function was added at 23:50:28 on April 19, 2020 in v1.1.0
+// This function was added at 23:50:28 on April 19, 2020 in v1.1.4
 func (c *console) replaceMsg(lev level, v string) string {
 	c.formatting = strings.Replace(c.formatting, "{level}", "["+lev.toStr()+"]", -1)
 	c.formatting = strings.Replace(c.formatting, "{time}", c.tz.NowTimeStr(), -1)
