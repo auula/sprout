@@ -39,7 +39,6 @@ func NewClog(lev level, zone logTimeZone, formatting string) Logger {
 		formatting: "",
 	}
 	consoleLog.formatting = buildFormat(formatting)
-
 	consoleLog.initTime()
 	return consoleLog
 }
