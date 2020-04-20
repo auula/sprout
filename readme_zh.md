@@ -47,8 +47,8 @@ go get -u github.com/Higker/logker
 #### PS:如果出现下面👇提示:
 ```shell
 $ go get github.com/Higker/logker
-go: github.com/Higker/logker upgrade => v1.0.9
-go get: github.com/Higker/logker@v1.0.9: parsing go.mod:
+go: github.com/Higker/logker upgrade => v1.1.5
+go get: github.com/Higker/logker@v1.1.5: parsing go.mod:
         module declares its path as: github.com/higker/logker
                 but was required as: github.com/Higker/logker
 ```
@@ -58,7 +58,7 @@ module tets
 
 go 1.14
 
-require github.com/higker/logker v1.0.9 
+require github.com/higker/logker v1.1.5
 
 ```
 
@@ -80,7 +80,8 @@ func main() {
 	// klog.GB1  	= 1GB
 	// klog.MB10  	= 10MB
  	// klog.MB100	= 100MB
-	flog := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777)
+	format := "{level} - 时间 {time}  - 位置 {position} - 消息 {message}" //This version was modified from v 1.1.5
+	flog := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777,format)
 	// 模拟日志输出
 	for {
 		flog.Debug("DEBUG : %d + %d = %d",1,2,1+2)
@@ -103,6 +104,13 @@ func main() {
 // timeZone:    zone,	   \\ 你需要设置的时区 可以使用内置常量  你可以在下面查看文档链接
 // power:       power,     \\ 你的文件系统权限
 // fileMaxSize: size,      \\ 单个日志文件大小
+// format:
+	//现在upgrade到v1.1.5版本即可自定义消息输出格式~
+	//自定义标签名字必须是{level} {time} {position} {message}
+	//自定义标签的位置就是程序运行时输出对应的日志消息的位置！！！！
+	//例如下面我自定义的
+	// 1. //format := "{level} - {time} - {position} - {message}"
+	format := "{level} - 时间 {time}  - 位置 {position} - 消息 {message}" //This version was modified from v 1.1.5
 ```
 
 #### 2. Console Logger
@@ -136,7 +144,7 @@ func main() {
 }
 ```
 #### 3. 演示截图:
->> 截图没有更新~ 当前截图为 v1.0.9 version,你可以自己安装库使用查看效果,当然可能是新版本的牛逼一点2333333
+> 截图没有更新~ 当前截图为 v1.0.9 version,你可以自己安装库使用查看效果,当然可能是新版本的牛逼一点2333333
 ![LogKerGolang](https://i.loli.net/2020/04/18/Jjv82WDsyGtCaEH.png)
 
 ![log,golang,logKer](https://i.loli.net/2020/04/18/mJnvBp7oXwd8KSU.png)
