@@ -20,7 +20,7 @@ var (
 	// {position} == runtime caller info
 	// {message} == logging message
 	// OutPut: [INFO] 2006-01-02 13:05.0006 MP - Position: test.go|main.test:21 - Message: news
-	Format = "{level} - Date: {time}  {position} - Message: {message}" //This was modified for v 1.1.4
+	FormatDefault = "{level} - Date: {time}  {position} - Message: {message}" //This was modified for v 1.1.5
 
 )
 
@@ -125,20 +125,22 @@ func buildFormat(str string) string {
 }
 
 // ReplaceOurCustomMessageFormatIdentifier
-// This function was added at 23:50:28 on April 19, 2020 in v1.1.4
+// This function was added at 23:50:28 on April 19, 2020 in v1.1.5
 func (c *console) replaceMsg(lev level, v string) string {
-	c.formatting = strings.Replace(c.formatting, "{level}", "["+lev.toStr()+"]", -1)
-	c.formatting = strings.Replace(c.formatting, "{time}", c.tz.NowTimeStr(), -1)
-	c.formatting = strings.Replace(c.formatting, "{position}", buildCallerStr(SKIP+1), -1)
-	c.formatting = strings.Replace(c.formatting, "{message}", v, -1)
-	return c.formatting
+	fStr := c.formatting
+	fStr = strings.Replace(fStr, "{level}", "["+lev.toStr()+"]", -1)
+	fStr = strings.Replace(fStr, "{time}", c.tz.NowTimeStr(), -1)
+	fStr = strings.Replace(fStr, "{position}", buildCallerStr(SKIP+1), -1)
+	fStr = strings.Replace(fStr, "{message}", v, -1)
+	return fStr
 }
 func (f *fileLog) replaceMsg(lev level, v string, skip int) string {
-	f.formatting = strings.Replace(f.formatting, "{level}", "["+lev.toStr()+"]", -1)
-	f.formatting = strings.Replace(f.formatting, "{time}", f.tz.NowTimeStr(), -1)
-	f.formatting = strings.Replace(f.formatting, "{position}", buildCallerStr(skip), -1)
-	f.formatting = strings.Replace(f.formatting, "{message}", v, -1)
-	return f.formatting
+	fStr := f.formatting
+	fStr = strings.Replace(fStr, "{level}", "["+lev.toStr()+"]", -1)
+	fStr = strings.Replace(fStr, "{time}", f.tz.NowTimeStr(), -1)
+	fStr = strings.Replace(fStr, "{position}", buildCallerStr(skip), -1)
+	fStr = strings.Replace(fStr, "{message}", v, -1)
+	return fStr
 }
 
 // 第一次写这么整个的开源项目啊哈哈哈哈 解决了issues 有点激动啊...
