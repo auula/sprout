@@ -15,8 +15,8 @@ import (
 
 var (
 	//[INFO] 2006-01-02 13:05.0006 MP - Position: test.go|main.test:21 - Message: news
-	Format     = "{level} - Date: {time}  {position} - Message: {message}" //This version was modified from v 1.1.0
-	FileFormat = Format + "\n"
+	Format = "{level} - Date: {time}  {position} - Message: {message}" //This was modified for v 1.1.4
+
 )
 
 // Logging record
