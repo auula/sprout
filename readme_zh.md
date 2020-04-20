@@ -108,23 +108,35 @@ func main() {
 #### 2. Console Logger
 
 ```go
+
 package main
 
 import (
-	klog "github.com/higker/logker"
-	"time"
+	"github.com/higker/logker"
+	"strings"
 )
 
+//type Formatting string
+
+// logKer library Test
 func main() {
-	// New Console logger
-	clog := klog.NewClog(klog.DEBUG,klog.Shanghai)
-	clog.Debug("DEBUG : %d + %d = %d",1,2,1+2)
-	clog.Error("ERROR")
-	clog.Warning("WARNING %p",clog)
-	clog.Info("INFO %s","Hello LogKer.")
+	// Now upgrade to version v 1.1.5 to customize the message output format ~
+	// TheCustomTagNameMustBe {level} {time} {position} {message}
+	// The location of the custom label is the location
+	// where the program outputs the corresponding log message at run time！！！！
+	// forExampleHereIsMyCustom
+	// 1. //format := "{level} - {time} - {position} - {message}"
+	format := "{level} - 时间 {time}  - 位置 {position} - 消息 {message}" //This version was modified from v 1.1.5
+	var log logker.Logger
+	log = logker.NewClog(logker.DEBUG, logker.Shanghai, format)
+	log.Debug("DEBUG %s","自定义日志消息匹配符测试")
+	log.Info("%v", log)
+	log.Warning("%v", logker.Shanghai)
+	log.Error("ERROR")
 }
 ```
 #### 3. 演示截图:
+>> 截图没有更新~ 当前截图为 v1.0.9 version,你可以自己安装库使用查看效果,当然可能是新版本的牛逼一点2333333
 ![LogKerGolang](https://i.loli.net/2020/04/18/Jjv82WDsyGtCaEH.png)
 
 ![log,golang,logKer](https://i.loli.net/2020/04/18/mJnvBp7oXwd8KSU.png)
