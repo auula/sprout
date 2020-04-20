@@ -29,6 +29,10 @@ logker</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
 - Is this you?😜
 ![log](http://140.143.237.196/generator/cache/1587226559_792.gif)
 
+## Upgrade List
+- [v1.1.5](https://github.com/Higker/logker/releases/tag/v1.1.5) Support for custom message formats  [issues1](https://github.com/Higker/logker/issues/1)
+
+
 ## Installation
 
 🔝 The minimum requirement of Go version is **1.11**.
