@@ -51,8 +51,8 @@ command add `-u` flag to update in the future.
 #### PS: if A kind of Tips:
 ```shell
 $ go get github.com/Higker/logker
-go: github.com/Higker/logker upgrade => v1.0.9
-go get: github.com/Higker/logker@v1.0.9: parsing go.mod:
+go: github.com/Higker/logker upgrade => v1.1.5
+go get: github.com/Higker/logker@v1.1.5: parsing go.mod:
         module declares its path as: github.com/higker/logker
                 but was required as: github.com/Higker/logker
 ```
@@ -62,7 +62,7 @@ module tets
 
 go 1.14
 
-require github.com/higker/logker v1.0.9 
+require github.com/higker/logker v1.1.5 
 
 ```
 
@@ -147,6 +147,14 @@ func main() {
 	log.Warning("%v", logker.Shanghai)
 	log.Error("ERROR")
 }
+```
+## OutPut
+```shell
+[ DEBUG ] - 时间 2020-04-20 11:57:23.8927  - 位置 main.go|main.main:23 - 消息 DEBUG 自定义日志消息匹配符测试
+[  INFO ] - 时间 2020-04-20 11:57:23.8928  - 位置 main.go|main.main:24 - 消息 &{0 Asia/Shanghai 0xc00008e220 {level} - 时间 {t位置 {position} - 消息 {message}}
+[WARNING] - 时间 2020-04-20 11:57:23.8928  - 位置 main.go|main.main:25 - 消息 Asia/Shanghai
+[ ERROR ] - 时间 2020-04-20 11:57:23.8929  - 位置 main.go|main.main:26 - 消息 ERROR
+
 ```
 #### 3. Effect:
 > The screenshot is not updated ~ The current screenshot is v1.0.9 version,
