@@ -26,7 +26,8 @@ logker</code> 是一个Golang小型简单易用的日志库.👨‍💻‍</p>
 - `未来会支持: 网络传输存储 websoket🙏.`
 - `本项目会不断更新着. 如果你喜欢😍请把你的star给我吧 Thanks♪(･ω･)ﾉ!`
 - 这是你吗?😜
-![log](http://140.143.237.196/generator/cache/1587226559_792.gif)
+
+![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge3na9rkzwg308c04oe5c.gif)
 
 ## 升级目录
 - [v1.1.5](https://github.com/Higker/logker/releases/tag/v1.1.5) 支持自定义消息输出格式  [issues1](https://github.com/Higker/logker/issues/1)
