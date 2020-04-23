@@ -27,7 +27,8 @@ logker</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
 - `Future support: The remote computer stores the websoket output🙏.`
 - `The project is constantly maintained and updated. I like 😍A kind of Please click star Thanks♪(･ω･)ﾉ!`
 - Is this you?😜
-![log](http://140.143.237.196/generator/cache/1587226559_792.gif)
+
+![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge3na9rkzwg308c04oe5c.gif)
 
 ## Upgrade List
 - [v1.1.5](https://github.com/Higker/logker/releases/tag/v1.1.5) Support for custom message formats  [issues1](https://github.com/Higker/logker/issues/1)
