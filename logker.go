@@ -8,7 +8,7 @@ import (
 )
 
 // This is package version
-const Version = "1.1.4"
+const Version = "1.1.6"
 
 /*
  ____ ____ ____ ____ ____ ____

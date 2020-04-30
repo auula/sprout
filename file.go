@@ -108,7 +108,7 @@ func (f *fileLog) Info(value string, args ...interface{}) {
 			// division file
 			f.divisionLogFile(plain)
 		}
-		f.outPutMessage(INFO, fmt.Sprintf(value, args...))
+		f.outPutMessage(INFO,fmt.Sprintf(value, args...))
 	}
 }
 func (f *fileLog) Debug(value string, args ...interface{}) {
