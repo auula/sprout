@@ -44,11 +44,11 @@ logker</code> 是一个Golang小型简单易用的日志库.👨‍💻‍</p>
 🔝 你的包管理必须使用的是go module!!!
 
 ```shell script
-go get github.com/Higker/logker
+go get github.com/higker/logker
 ```
 或者
 ```shell script
-go get -u github.com/Higker/logker
+go get -u github.com/higker/logker
 ```
 
 运行时也可以添加使用参数 `-u` 来获取更新.
