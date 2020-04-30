@@ -75,11 +75,11 @@ func main() {
  	// klog.MB100	= 100MB
 	format := "{level} - DATE {time}  - POS {position} - MSG {message}" //This version was modified from v 1.1.5
 	//Create Log Buffer
-    task := InitAsync(Qs1w)
-    flog,e := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777,format,task)
-    if e != nil{
-        ..... //Custom Operation
-    }
+    	task := InitAsync(Qs1w)
+   	flog,e := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777,format,task)
+    	if e != nil{
+       	    .... //Custom Operation
+   	}
 	// Analog output log
 	for {
 		flog.Debug("DEBUG : %d + %d = %d",1,2,1+2)
@@ -135,12 +135,12 @@ func main() {
 	// forExampleHereIsMyCustom
 	// 1. //format := "{level} - {time} - {position} - {message}"
 	format := "{level} - 时间 {time}  - 位置 {position} - 消息 {message}" //This version was modified from v 1.1.5
-    //Create Log Buffer
-    task := InitAsync(Qs1w)
+    	//Create Log Buffer
+    	task := InitAsync(Qs1w)
 	log,e := logker.NewClog(logker.DEBUG, logker.Shanghai, format,task)
-    if e != nil{
-        ..... //Custom Operation
-    }
+    	if e != nil{
+        	..... //Custom Operation
+    	}
 	log.Debug("DEBUG %s","自定义日志消息匹配符测试")
 	log.Info("%v", log)
 	log.Warning("%v", logker.Shanghai)
