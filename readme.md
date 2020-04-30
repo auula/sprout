@@ -32,7 +32,7 @@ logker</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
 
 ## Upgrade List
 - [v1.1.5](https://github.com/Higker/logker/releases/tag/v1.1.5) Support for custom message formats.  [issues1](https://github.com/Higker/logker/issues/1)
-- [v1.1.6] https://github.com/Higker/logker/releases/tag/v1.1.6) Support coroutine to record logs,The code base is smaller and lighter. 
+- [v1.1.6](https://github.com/Higker/logker/releases/tag/v1.1.6) Support coroutine to record logs,The code base is smaller and lighter. 
 
 
 ## Historical Documents
