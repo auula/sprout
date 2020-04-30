@@ -9,7 +9,6 @@ import (
 	"errors"
 	"fmt"
 	"strings"
-	"testing"
 )
 
 // console Logger
@@ -27,24 +26,7 @@ type console struct {
 	asyncTask  *AsyncTask
 }
 
-// Build console Logger
-func NewClog(lev level, zone logTimeZone, formatting string, at *AsyncTask, t *testing.T) (Logger, error) {
-	consoleLog := &console{
-		// Level: logger Level
-		logLevel: lev,
-		// Zone : logger Time Zone
-		timeZone:  zone,
-		tz:        nil,
-		asyncTask: at,
-	}
-	if err := verify(formatting); err != nil {
-		return nil, err
-	}
-	consoleLog.formatting = formatting
-	consoleLog.initTime()
-	consoleLog.asyncTask.begin(t)
-	return consoleLog, nil
-}
+
 
 func (c *console) initTime() {
 	// set customize time zone
@@ -59,22 +41,22 @@ func (c *console) isEnableLevel(lev level) bool {
 
 func (c *console) Info(value string, args ...interface{}) {
 	if c.isEnableLevel(INFO) {
-		c.asyncTask.sendMsg(c.pack(INFO, fmt.Sprintf(value, args...)))
+		c.sendMsg(c.pack(INFO, fmt.Sprintf(value, args...)))
 	}
 }
 func (c *console) Debug(value string, args ...interface{}) {
 	if c.isEnableLevel(DEBUG) {
-		c.asyncTask.sendMsg(c.pack(DEBUG, fmt.Sprintf(value, args...)))
+		c.sendMsg(c.pack(DEBUG, fmt.Sprintf(value, args...)))
 	}
 }
 func (c *console) Error(value string, args ...interface{}) {
 	if c.isEnableLevel(ERROR) {
-		c.asyncTask.sendMsg(c.pack(ERROR, fmt.Sprintf(value, args...)))
+		c.sendMsg(c.pack(ERROR, fmt.Sprintf(value, args...)))
 	}
 }
 func (c *console) Warning(value string, args ...interface{}) {
 	if c.isEnableLevel(WARNING) {
-		c.asyncTask.sendMsg(c.pack(WARNING, fmt.Sprintf(value, args...)))
+		c.sendMsg(c.pack(WARNING, fmt.Sprintf(value, args...)))
 	}
 }
 

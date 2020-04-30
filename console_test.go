@@ -18,8 +18,8 @@ func TestVerifyString(t *testing.T) {
 
 func TestConsole_Debug(t *testing.T) {
 	defaults := "{level} - Date: {time}  {position} - Message: {message}"
-	task := InitAsyncTask(Qs1w)
-	logger, e := NewClog(ERROR, Shanghai, defaults, task, t)
+	task := InitAsync(Qs1w)
+	logger, e := NewClog(ERROR, Shanghai, defaults, task)
 	if e != nil {
 		t.Log(e)
 	}
