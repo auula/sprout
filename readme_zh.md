@@ -73,12 +73,12 @@ func main() {
 	// klog.MB10  	= 10MB
  	// klog.MB100	= 100MB
 	format := "{level} - 时间 {time}  - 位置 {position} - 消息 {message}" 
-  //创建日志缓冲区
-  task := InitAsync(Qs1w) //This version was modified from v 1.1.6
-  flog,e := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777,format,task)
-  if e != nil{
-       	.... //根据自己情况自定义操作
-  }
+  	//创建日志缓冲区
+  	task := InitAsync(Qs1w) //This version was modified from v 1.1.6
+  	flog,e := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777,format,task)
+  	if e != nil{
+       		.... //根据自己情况自定义操作
+  	}
 	// 模拟日志输出
 	for {
 		flog.Debug("DEBUG : %d + %d = %d",1,2,1+2)
@@ -134,11 +134,11 @@ func main() {
 	// 1. //format := "{level} - {time} - {position} - {message}"
 	format := "{level} - 时间 {time}  - 位置 {position} - 消息 {message}" //This version was modified from v 1.1.5
 	//日志缓冲区
-  task := InitAsync(Qs1w) //This version was modified from v 1.1.6
+  	task := InitAsync(Qs1w) //This version was modified from v 1.1.6
 	log,e := logker.NewClog(logker.DEBUG, logker.Shanghai, format,task)
-  if e != nil{
-       ..... //自定义操作
-  }
+  	if e != nil{
+       		..... //自定义操作
+  	}
 	log.Debug("DEBUG %s","自定义日志消息匹配符测试")
 	log.Info("%v", log)
 	log.Warning("%v", logker.Shanghai)
