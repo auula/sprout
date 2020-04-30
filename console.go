@@ -1,11 +1,15 @@
 // Copyright (c) 2020 HigKer
 // Open Source: MIT License
 // Author: SDing <deen.job@qq.com>
-// Date: 2020/4/16 - 9:36 下午
+// Date: 2020/4/30 - 9:13 下午
 
 package logker
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+	"strings"
+)
 
 // console Logger
 type console struct {
@@ -19,7 +23,10 @@ type console struct {
 	// code : WheColor bool
 	// MessageMatchingCard
 	formatting string
+	asyncTask  *AsyncTask
 }
+
+
 
 func (c *console) initTime() {
 	// set customize time zone
@@ -32,27 +39,34 @@ func (c *console) isEnableLevel(lev level) bool {
 	return c.logLevel <= lev
 }
 
-//func (c *console) IsEnableColor() bool {
-//	return c.WheColor
-//}
-
 func (c *console) Info(value string, args ...interface{}) {
 	if c.isEnableLevel(INFO) {
-		c.outPutMessage(INFO, fmt.Sprintf(value, args...))
+		c.sendMsg(c.pack(INFO, fmt.Sprintf(value, args...)))
 	}
 }
 func (c *console) Debug(value string, args ...interface{}) {
 	if c.isEnableLevel(DEBUG) {
-		c.outPutMessage(DEBUG, fmt.Sprintf(value, args...))
+		c.sendMsg(c.pack(DEBUG, fmt.Sprintf(value, args...)))
 	}
 }
 func (c *console) Error(value string, args ...interface{}) {
 	if c.isEnableLevel(ERROR) {
-		c.outPutMessage(ERROR, fmt.Sprintf(value, args...))
+		c.sendMsg(c.pack(ERROR, fmt.Sprintf(value, args...)))
 	}
 }
 func (c *console) Warning(value string, args ...interface{}) {
 	if c.isEnableLevel(WARNING) {
-		c.outPutMessage(WARNING, fmt.Sprintf(value, args...))
+		c.sendMsg(c.pack(WARNING, fmt.Sprintf(value, args...)))
 	}
+}
+
+// repair issues : https://github.com/Higker/logker/issues/1
+func verify(str string) error {
+	match := []string{"{level}", "{time}", "{position}", "{message}"}
+	for _, mc := range match {
+		if !strings.Contains(string(str), mc) {
+			return errors.New("Lack Log format Tag :" + mc + "!!")
+		}
+	}
+	return nil
 }

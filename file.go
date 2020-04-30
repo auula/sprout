@@ -53,6 +53,7 @@ type fileLog struct {
 	fileMaxSize int64
 	// MessageMatchingCard
 	formatting string
+	asyncTask *AsyncTask
 }
 
 // Initialization error file pointer
@@ -104,49 +105,22 @@ func (f *fileLog) checkErrSize() bool {
 }
 func (f *fileLog) Info(value string, args ...interface{}) {
 	if f.isEnableLevel(INFO) {
-		if f.checkSize() {
-			// division file
-			f.divisionLogFile(plain)
-		}
-		f.outPutMessage(INFO, fmt.Sprintf(value, args...))
+		f.sendMsg(f.pack(INFO,fmt.Sprintf(value,args...)))
 	}
 }
 func (f *fileLog) Debug(value string, args ...interface{}) {
 	if f.isEnableLevel(DEBUG) {
-		if f.checkSize() {
-			// division file
-			f.divisionLogFile(plain)
-		}
-		f.outPutMessage(DEBUG, fmt.Sprintf(value, args...))
+		f.sendMsg(f.pack(DEBUG,fmt.Sprintf(value,args...)))
 	}
 }
 func (f *fileLog) Error(value string, args ...interface{}) {
 	if f.isEnableLevel(ERROR) {
-		if f.checkSize() {
-			// division file
-			f.divisionLogFile(plain)
-		}
-		// zh_CN:	检测error独立文件输出开关是否开启 如果开启就往error独立文件输出内容
-		// usa_EN:	Check whether the error independent file output switch is turned on.
-		// If it is turned on, output the content to the error independent file
-		if f.isEnableErr() {
-			if f.checkErrSize() {
-				// division error file
-				f.divisionLogFile(major)
-			}
-			f.outPutErrMessage(ERROR, fmt.Sprintf(value, args...))
-		}
-		f.outPutMessage(ERROR, fmt.Sprintf(value, args...))
+		f.sendMsg(f.pack(ERROR,fmt.Sprintf(value,args...)))
 	}
 }
 func (f *fileLog) Warning(value string, args ...interface{}) {
 	if f.isEnableLevel(WARNING) {
-		if f.checkSize() {
-			// division file
-			f.divisionLogFile(plain)
-		}
-
-		f.outPutMessage(WARNING, fmt.Sprintf(value, args...))
+		f.sendMsg(f.pack(WARNING,fmt.Sprintf(value,args...)))
 	}
 }
 

@@ -1,33 +1,40 @@
 // Copyright (c) 2020 HigKer
 // Open Source: MIT License
 // Author: SDing <deen.job@qq.com>
+// Date: 2020/4/30 - 8:41 下午
 
 package logker
 
 import "fmt"
 
+// ByteSize
+type ByteSize float64
+
 // Custom logging level type.
 type level int
 
+// Logging level
 const (
 	DEBUG level = iota
 	INFO
 	WARNING
 	ERROR
 )
-const (
-	// Log file size
-	// You can also customize. Unit is kb.
-	MB10  int64 = 10 * 1024 * 1024
-	MB100 int64 = 100 * 1024 * 1024
-	GB1   int64 = 10 * MB100
-)
 
-// Type Log Logger
-// Logger interface.
-// Abstract Logger object.
+// LogASingleFileConstant
+const (
+	_ = iota
+	KB ByteSize = 1 << (10*iota)
+	MB
+	GB
+	TB
+	PB
+	EB
+	ZB
+	YB
+)
 type Logger interface {
-	// English: Info level log
+	// Info level log
 	Info(value string, arg ...interface{})
 	// Debug level log
 	Debug(value string, arg ...interface{})
@@ -41,14 +48,16 @@ type Logger interface {
 func (lev level) toStr() string {
 	switch lev {
 	case DEBUG:
-		return " DEBUG "
+		return "[ DEBUG ]"
 	case INFO:
-		return "  INFO "
+		return "[  INFO ]"
 	case WARNING:
-		return "WARNING"
+		return "[WARNING]"
 	case ERROR:
-		return " ERROR "
+		return "[ ERROR ]"
 	default:
-		panic("Level to string fail :" + fmt.Sprintf("%d", lev))
+		// TheProgramWonTComeHereThroughTheCase~
+		return fmt.Sprintf("[ UNWORKABLE ] 「Level to string fail:%d」\n", lev)
+		//panic("Level to string fail :" + fmt.Sprintf("%d", lev))
 	}
 }

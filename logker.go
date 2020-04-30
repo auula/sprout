@@ -1,6 +1,8 @@
-// Copyright (c) 2020 Higker
+// Copyright (c) 2020 HigKer
 // Open Source: MIT License
-// Author: higker <deen.job@qq.com>
+// Author: SDing <deen.job@qq.com>
+// Date: 2020/5/1 - 1:55 上午
+
 package logker
 
 import (
@@ -8,42 +10,41 @@ import (
 )
 
 // This is package version
-const Version = "1.1.4"
+const Version = "1.1.6"
 
 /*
  ____ ____ ____ ____ ____ ____
 ||L |||o |||g |||K |||e |||r ||
 ||__|||__|||__|||__|||__|||__||
 |/__\|/__\|/__\|/__\|/__\|/__\|
-
 zh_CN:
 LogKer是Golang语言的日志操作库.
 1.控制台输出 (已经实现)
 2.文件输出 (已经实现)
 3.WebSocket输出 (未来将会支持)
 4.网络kafka输出  (未来将会支持)
-
 */
 
-//type Formatting string
-
 // Build console Logger
-func NewClog(lev level, zone logTimeZone, formatting string) Logger {
+func NewClog(lev level, zone logTimeZone, formatting string, at *AsyncTask) (Logger, error) {
 	consoleLog := &console{
 		// Level: logger Level
 		logLevel: lev,
 		// Zone : logger Time Zone
-		timeZone: zone,
-		tz:       nil,
-		// Log Message Format Card
-		formatting: buildFormat(formatting),
+		timeZone:  zone,
+		tz:        nil,
+		asyncTask: at,
 	}
+	if err := verify(formatting); err != nil {
+		return nil, err
+	}
+	consoleLog.formatting = formatting
 	consoleLog.initTime()
-	return consoleLog
+	consoleLog.begin()
+	return consoleLog, nil
 }
-
 // Build File logger
-func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode, formatting string) Logger {
+func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode, formatting string,at *AsyncTask) (Logger,error){
 	fg := &fileLog{
 		// logLevel:    lev,        logging level
 		logLevel: lev,
@@ -62,13 +63,17 @@ func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName stri
 		power: power,
 		// fileMaxSize: size,       logging alone file max size
 		fileMaxSize: size,
-		// MessageMatchingCard
-		formatting: buildFormat(formatting),
 	}
+	if err:=verify(formatting);err != nil {
+		return nil,err
+	}
+	fg.formatting = formatting
+	fg.asyncTask = at
+	fg.begin()
 	fg.tz = &timeZone{TimeZoneStr: fg.timeZone}
 	fg.file = fg.initFilePtr()
 	if fg.isEnableErr() {
 		fg.errFile = fg.initErrPtr()
 	}
-	return fg
+	return fg,nil
 }

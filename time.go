@@ -38,7 +38,7 @@ const (
 	Korea     logTimeZone = "Asia/Pyongyang"
 	Shanghai  logTimeZone = "Asia/Shanghai" // Shanghai China
 
-	//timeFormat    = "2006-01-02 15:04:05.0000 PM"
+	//timeFormat    = "2006-01-02 15:04:05.0000"
 	timeFormat    = "2006-01-02 15:04:05.0000"
 	logTimeFormat = "2006_01_02_15_04_05.0000"
 )
@@ -48,7 +48,7 @@ type timeZone struct {
 	TimeZoneStr logTimeZone // your custom time zone,recommend use this.
 }
 
-// get time str fmt: 2006-01-02 15:04:05.0000 PM
+// get time str fmt: 2006-01-02 15:04:05.0000
 func (tz *timeZone) NowTimeStr() (ts string) {
 	return tz.localTime().Format(timeFormat)
 }

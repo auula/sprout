@@ -13,7 +13,7 @@ import (
 
 // Runtime caller skip
 const (
-	SKIP = 3
+	SKIP = 1
 )
 
 func buildCallerStr(skip int) string {
