@@ -37,6 +37,7 @@ LogKer</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
 
 ## Historical Documents
 > The Documents version is v1.1.8
+- [PPT](https://www.kdocs.cn/l/sGu6KjnJW)
 - [v1.1.5 Doc](https://github.com/Higker/logker/blob/master/readme_v1.1.5.md)
 
 ## Installation

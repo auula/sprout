@@ -11,7 +11,7 @@ const (
 	// {time} == time
 	// {position} == runtime caller info
 	// {message} == logging message
-	// //This was modified for v 1.1.5
+	// This was modified for v 1.1.5
 	// OutPut: [INFO] 2006-01-02 13:05.0006 MP - Position: test.go|main.test:21 - Message: news
 	DefaultFormat = "{level} - Date: {time}  {position} - Message: {message}"
 )

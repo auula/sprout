@@ -1,6 +1,11 @@
 /*
 LogKer  for Golang simple  logging library.
 
+Copyright (c) 2020 HigKer <deen.job@qq.com>
+
+Open Source: MIT License.
+
+
 The simplest way to use LogKer is simply the package-level exported logger:
 
 Console Logging :
@@ -14,16 +19,19 @@ Console Logging :
   func main() {
 		// Custom logging message template
 		format := "{level} - 时间 {time}  - 位置 {position} - 消息 {message}"
-    	//Create Log Buffer
-    	task := InitAsync(Qs1w)
+    	// Create Log Buffer
+    	task := klog.InitAsync(klog.Qs1w)
 		log,e := klog.NewClog(klog.DEBUG, klog.Shanghai,format,task)
  		if e != nil{
-        	..... //Custom Operation
+        	// .... Custom Operation
     	}
-		log.Debug("DEBUG %s","自定义日志消息匹配符测试")
-		log.Info("%v", log)
-		log.Warning("%v", logker.Shanghai)
-		log.Error("ERROR")
+		// Analog output log
+		for {
+			log.Debug("DEBUG %s","自定义日志消息匹配符测试")
+			log.Info("%v", log)
+			log.Warning("%v", logker.Shanghai)
+			log.Error("ERROR")
+		}
   }
 
 Output:
@@ -37,37 +45,43 @@ Output:
 
 File Logging :
 
-package main
+	package main
 
-import (
-	klog "github.com/higker/logker"
-	"time"
-)
+	import (
+		klog "github.com/higker/logker"
+		"time"
+	)
 
-func main() {
-	// Specify file location! Create folder in advance!!
-	dir := "/Users/ding/Documents/test_log"
-	// New file logger
-	// File Max size : You can also use built-in constants
-	// klog.GB1  	= 1GB
-	// klog.MB10  	= 10MB
- 	// klog.MB100	= 100MB
-	format := "{level} - DATE {time}  - POS {position} - MSG {message}"
-	//Create Log Buffer
-    	task := InitAsync(Qs1w)
-   	flog,e := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777,format,task)
+	func main() {
+		// Specify file location! Create folder in advance!!
+		dir := "/Users/ding/Documents/test_log"
+		// New file logger
+		// File Max size : You can also use built-in constants
+		// klog.GB1  	= 1GB
+		// klog.MB10  	= 10MB
+ 		// klog.MB100	= 100MB
+		format := "{level} - DATE {time}  - POS {position} - MSG {message}"
+		// Create Log Buffer
+    	task := klog.InitAsync(klog.Qs1w)
+   		flog,e := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777,format,task)
     	if e != nil{
-       	    .... //Custom Operation
-   	}
-	// Analog output log
-	for {
-		flog.Debug("DEBUG : %d + %d = %d",1,2,1+2)
-		flog.Error("ERROR")
-		flog.Warning("WARNING %p",flog)
-		flog.Info("INFO %s","Hello LogKer.")
-		time.Sleep(2 * time.Second)
+       	    // .... Custom Operation
+   		}
+		// Analog output log
+		for {
+			flog.Debug("DEBUG : %d + %d = %d",1,2,1+2)
+			flog.Error("ERROR")
+			flog.Warning("WARNING %p",flog)
+			flog.Info("INFO %s","Hello LogKer.")
+			time.Sleep(2 * time.Second)
+		}
 	}
-}
+
+Output File:
+	log.log
+	error_log.log
+	log_2020_05_01_14_06_05.6390_bak.log
+	error_2020_05_01_14_06_16.4008_bak.log
 
 For a full guide visit https://github.com/higker/logker
 */

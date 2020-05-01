@@ -36,6 +36,7 @@ LogKer</code> 是一个Golang小型简单易用的日志库.👨‍💻‍</p>
 
 ## 历史文档
 > 当前文档版本 v1.1.8
+- [PPT](https://www.kdocs.cn/l/sGu6KjnJW)
 - [v1.1.5 Doc](https://github.com/Higker/logker/blob/master/readme_v1.1.5.md)
 
 ## 开始安装
@@ -137,7 +138,7 @@ func main() {
   	task := InitAsync(Qs1w) //This version was modified from v 1.1.6
 	log,e := logker.NewClog(logker.DEBUG, logker.Shanghai, format,task)
   	if e != nil{
-       		..... //自定义操作
+  		//自定义操作
   	}
 	log.Debug("DEBUG %s","自定义日志消息匹配符测试")
 	log.Info("%v", log)
