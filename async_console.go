@@ -7,6 +7,7 @@ package logker
 
 import (
 	"github.com/fatih/color"
+	"runtime"
 	"strings"
 )
 
@@ -27,7 +28,14 @@ func (c *console) sendMsg(msg *message) {
 }
 
 func (c *console) begin() {
-	go c.asyncOutPutTask()
+	//time.Sleep(5*time.Second)
+	switch {
+	case runtime.NumCPU() > 0 && runtime.NumCPU() <= 2:
+		go c.asyncOutPutTask()
+	default:
+		go c.asyncOutPutTask()
+		go c.asyncOutPutTask()
+	}
 }
 
 func (c *console) asyncOutPutTask() {
@@ -52,7 +60,7 @@ func (c *console) asyncOutPutTask() {
 			color.Red("-----------------------------------------------------------------")
 			c.logLevel = DEBUG
 			// recursion
-			c.sendMsg(c.pack(ERROR,"Log Level Type Error,Program automatically set to debug！！！"))
+			c.sendMsg(c.pack(ERROR, "Log Level Type Error,Program automatically set to debug！！！"))
 		}
 	}
 }

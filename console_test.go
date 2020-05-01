@@ -11,7 +11,7 @@ import (
 
 func TestVerifyString(t *testing.T) {
 	defaults := "{level} - Date: {time}  {position1} - Message: {message}"
-	if err:=verify(defaults);err != nil {
+	if err := verify(defaults); err != nil {
 		t.Log(err)
 	}
 }
@@ -19,11 +19,12 @@ func TestVerifyString(t *testing.T) {
 func TestConsole_Debug(t *testing.T) {
 	defaults := "{level} - Date: {time}  {position} - Message: {message}"
 	task := InitAsync(Qs1w)
-	logger, e := NewClog(ERROR, Shanghai, defaults, task)
+	logger, e := NewClog(DEBUG, Shanghai, defaults, task)
 	if e != nil {
 		t.Log(e)
 	}
-	for  {
-		logger.Error("Debug")
+	for {
+		logger.Error("ERROR")
+		logger.Debug("DEBUG")
 	}
 }

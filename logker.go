@@ -10,7 +10,7 @@ import (
 )
 
 // This is package version
-const Version = "1.1.6"
+const Version = "1.1.7"
 
 /*
  ____ ____ ____ ____ ____ ____
@@ -43,8 +43,9 @@ func NewClog(lev level, zone logTimeZone, formatting string, at *AsyncTask) (Log
 	consoleLog.begin()
 	return consoleLog, nil
 }
+
 // Build File logger
-func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode, formatting string,at *AsyncTask) (Logger,error){
+func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode, formatting string, at *AsyncTask) (Logger, error) {
 	fg := &fileLog{
 		// logLevel:    lev,        logging level
 		logLevel: lev,
@@ -64,8 +65,8 @@ func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName stri
 		// fileMaxSize: size,       logging alone file max size
 		fileMaxSize: size,
 	}
-	if err:=verify(formatting);err != nil {
-		return nil,err
+	if err := verify(formatting); err != nil {
+		return nil, err
 	}
 	fg.formatting = formatting
 	fg.asyncTask = at
@@ -75,5 +76,5 @@ func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName stri
 	if fg.isEnableErr() {
 		fg.errFile = fg.initErrPtr()
 	}
-	return fg,nil
+	return fg, nil
 }
