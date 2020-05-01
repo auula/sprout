@@ -22,10 +22,12 @@ func (f *fileLog) sendMsg(msg *message) {
 	f.asyncTask.logQueue <- msg
 }
 
+// Execute this function to start an asynchronous task
 func (f *fileLog) begin() {
 	go f.asyncOutPutTask()
 }
 
+// Asynchronous Output Logging Tasks
 func (f *fileLog) asyncOutPutTask() {
 	for {
 		msg := <-f.asyncTask.logQueue

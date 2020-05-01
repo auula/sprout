@@ -3,11 +3,11 @@
     <h1 align="center">LogKer</h1>
 </p>
 <p align="center"><code>
-logker</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
+LogKer</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
 
 <p align="center">
     📚<a href="https://github.com/Higker/logker/blob/master/readme_zh.md" target="_blank">中文说明</a> | 
-    🤩<a href="https://pkg.go.dev/github.com/higker/logker?tab=doc" target="_blank">pkg.go.dev</a> | 
+    🤩<a href="https://pkg.go.dev/github.com/higker/logker?tab=doc" target="_blank">Document</a> | 
     👨‍💻‍ <a href="https://github.com/Higker/logker/releases" target="_blank">Release</a> 
 </p>
 
@@ -24,19 +24,19 @@ logker</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
 - Support log file size for split storage.
 - Error level output to specified file separately.
 - Four levels of `debug` `info` `error` `warning` are supported.
-- `Future support: The remote computer stores the websoket output🙏.`
+- `Future support: The remote computer stores the socket output🙏.`
 - `The project is constantly maintained and updated. I like 😍A kind of Please click star Thanks♪(･ω･)ﾉ!`
 - Is this you?😜
 
 ![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge3na9rkzwg308c04oe5c.gif)
 
 ## Upgrade List
-- [v1.1.5](https://github.com/Higker/logker/releases/tag/v1.1.5) Support for custom message formats.  [issues1](https://github.com/Higker/logker/issues/1)
-- [v1.1.6](https://github.com/Higker/logker/releases/tag/v1.1.6) Support coroutine to record logs,The code base is smaller and lighter. 
+- [v1.1.5](https://github.com/Higker/logker/releases/tag/v1.1.5) Support for custom message formats.(SerialVersion)  [issues1](https://github.com/Higker/logker/issues/1)
+- [v1.1.8](https://github.com/Higker/logker/releases/tag/v1.1.8) Support coroutine to record logs,The code base is smaller and lighter(AsynchronousProcessingVersion). 
 
 
 ## Historical Documents
-> The Documents version is v1.1.6
+> The Documents version is v1.1.8
 - [v1.1.5 Doc](https://github.com/Higker/logker/blob/master/readme_v1.1.5.md)
 
 ## Installation

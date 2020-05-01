@@ -15,9 +15,13 @@ import (
 )
 
 const (
+	// Error File Perfix
 	errPerfix = "error_"
-	suffix    = ".log"
+	// File Perfix
+	suffix = ".log"
+	// Backup File Suffix
 	bakSuffix = "_bak.log"
+	// Backup File Perfix
 	bakPerfix = "log_"
 )
 
@@ -53,7 +57,7 @@ type fileLog struct {
 	fileMaxSize int64
 	// MessageMatchingCard
 	formatting string
-	asyncTask *AsyncTask
+	asyncTask  *AsyncTask
 }
 
 // Initialization error file pointer
@@ -105,22 +109,22 @@ func (f *fileLog) checkErrSize() bool {
 }
 func (f *fileLog) Info(value string, args ...interface{}) {
 	if f.isEnableLevel(INFO) {
-		f.sendMsg(f.pack(INFO,fmt.Sprintf(value,args...)))
+		f.sendMsg(f.pack(INFO, fmt.Sprintf(value, args...)))
 	}
 }
 func (f *fileLog) Debug(value string, args ...interface{}) {
 	if f.isEnableLevel(DEBUG) {
-		f.sendMsg(f.pack(DEBUG,fmt.Sprintf(value,args...)))
+		f.sendMsg(f.pack(DEBUG, fmt.Sprintf(value, args...)))
 	}
 }
 func (f *fileLog) Error(value string, args ...interface{}) {
 	if f.isEnableLevel(ERROR) {
-		f.sendMsg(f.pack(ERROR,fmt.Sprintf(value,args...)))
+		f.sendMsg(f.pack(ERROR, fmt.Sprintf(value, args...)))
 	}
 }
 func (f *fileLog) Warning(value string, args ...interface{}) {
 	if f.isEnableLevel(WARNING) {
-		f.sendMsg(f.pack(WARNING,fmt.Sprintf(value,args...)))
+		f.sendMsg(f.pack(WARNING, fmt.Sprintf(value, args...)))
 	}
 }
 

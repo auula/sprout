@@ -15,16 +15,21 @@ type level int
 
 // Logging level
 const (
+	// Debug level
 	DEBUG level = iota
+	// Info level
 	INFO
+	// Warning level
 	WARNING
+	// Error level
 	ERROR
 )
 
-// LogASingleFileConstant
+// ByteSize
 const (
-	_ = iota
-	KB ByteSize = 1 << (10*iota)
+	// ByteSize Unit
+	_           = iota
+	KB ByteSize = 1 << (10 * iota)
 	MB
 	GB
 	TB
@@ -33,6 +38,7 @@ const (
 	ZB
 	YB
 )
+
 type Logger interface {
 	// Info level log
 	Info(value string, arg ...interface{})

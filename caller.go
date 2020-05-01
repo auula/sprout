@@ -13,9 +13,10 @@ import (
 
 // Runtime caller skip
 const (
-	SKIP = 3
+	skip = 3
 )
 
+// Gets The Program Caller Location
 func buildCallerStr(skip int) string {
 	pc, file, line, ok := runtime.Caller(skip)
 	if !ok {

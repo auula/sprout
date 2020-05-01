@@ -13,20 +13,27 @@ import (
 
 // Channel Buffer Size
 const (
-	_    = iota
+	_ = iota
+	// 10000  BufferSize
 	Qs1w = 10000 * iota
+	// 20000  BufferSize
 	Qs2w
+	// 30000  BufferSize
 	Qs3w
+	// 40000  BufferSize
 	Qs4w
+	// 50000  BufferSize
 	Qs5w
+	// 60000  BufferSize
 	Qs6w
 )
 
-// send pack msg to log queue
+// Send Pack Message To Log Queue
 func (c *console) sendMsg(msg *message) {
 	c.asyncTask.logQueue <- msg
 }
 
+// Execute this function to start an asynchronous task
 func (c *console) begin() {
 	//time.Sleep(5*time.Second)
 	switch {
@@ -38,6 +45,7 @@ func (c *console) begin() {
 	}
 }
 
+// Asynchronous Output Logging Tasks
 func (c *console) asyncOutPutTask() {
 	for {
 		msg := <-c.asyncTask.logQueue

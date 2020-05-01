@@ -17,9 +17,10 @@ type message struct {
 
 // Package Log Messages
 func (c *console) pack(lev level, msg string) *message {
-	return &message{level: lev, logTime: c.tz.NowTimeStr(), msg: msg, caller: buildCallerStr(SKIP),format: c.formatting}
+	return &message{level: lev, logTime: c.tz.NowTimeStr(), msg: msg, caller: buildCallerStr(skip), format: c.formatting}
 }
+
 // Package Log Messages
-func (f *fileLog) pack(lev level,msg string) *message{
-	return &message{level:lev,logTime:f.tz.NowTimeStr(),msg:msg,caller:buildCallerStr(SKIP),format:f.formatting}
+func (f *fileLog) pack(lev level, msg string) *message {
+	return &message{level: lev, logTime: f.tz.NowTimeStr(), msg: msg, caller: buildCallerStr(skip), format: f.formatting}
 }

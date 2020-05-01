@@ -3,11 +3,11 @@
     <h1 align="center">LogKer</h1>
 </p>
 <p align="center"><code>
-logker</code> 是一个Golang小型简单易用的日志库.👨‍💻‍</p>
+LogKer</code> 是一个Golang小型简单易用的日志库.👨‍💻‍</p>
 
 <p align="center">
-    📚<a href="https://github.com/Higker/logker/blob/master/README.md" target="_blank">English Docs</a> | 
-    🤩<a href="https://pkg.go.dev/github.com/higker/logker?tab=doc" target="_blank">pkg.go.dev</a> | 
+    📚<a href="https://github.com/Higker/logker/blob/master/README.md" target="_blank">English</a> | 
+    🤩<a href="https://pkg.go.dev/github.com/higker/logker?tab=doc" target="_blank">官方文档</a> | 
     👨‍💻‍ <a href="https://github.com/Higker/logker/releases" target="_blank">Release版本</a> 
 </p>
 
@@ -23,19 +23,19 @@ logker</code> 是一个Golang小型简单易用的日志库.👨‍💻‍</p>
 - `Error`级别的日志单独输出到指定文件。
 - 支持自动根据设置的文件大小切割日志文件。
 - 日志级别有4种 `debug` `info` `error` `warning` 。
-- `未来会支持: 网络传输存储 websoket🙏.`
+- `未来会支持: 网络传输存储 socket 🙏.`
 - `本项目会不断更新着. 如果你喜欢😍请把你的star给我吧 Thanks♪(･ω･)ﾉ!`
 - 这是你吗?😜
 
 ![](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge3na9rkzwg308c04oe5c.gif)
 
 ## 升级目录
-- [v1.1.5](https://github.com/Higker/logker/releases/tag/v1.1.5) 支持自定义消息输出格式  [issues1](https://github.com/Higker/logker/issues/1)
-- [v1.1.6](https://github.com/Higker/logker/releases/tag/v1.1.6) 支持异步写日志了，代码库更小了. 
+- [v1.1.5](https://github.com/Higker/logker/releases/tag/v1.1.5) 支持自定义消息输出格式，串行版本(如果你需要串行就使用这个版本)。  [issues1](https://github.com/Higker/logker/issues/1)
+- [v1.1.6](https://github.com/Higker/logker/releases/tag/v1.1.8) 支持异步写日志了，代码库更小了(如果你需要异步处理就使用这个版本)。
 
 
 ## 历史文档
-> 当前文档版本 v1.1.6
+> 当前文档版本 v1.1.8
 - [v1.1.5 Doc](https://github.com/Higker/logker/blob/master/readme_v1.1.5.md)
 
 ## 开始安装
@@ -74,7 +74,7 @@ func main() {
  	// klog.MB100	= 100MB
 	format := "{level} - 时间 {time}  - 位置 {position} - 消息 {message}" 
   	//创建日志缓冲区
-  	task := InitAsync(Qs1w) //This version was modified from v 1.1.6
+  	task := InitAsync(Qs1w) //This version was modified from v 1.1.8
   	flog,e := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777,format,task)
   	if e != nil{
        		.... //根据自己情况自定义操作
@@ -108,7 +108,7 @@ func main() {
 	//自定义标签的位置就是程序运行时输出对应的日志消息的位置！！！！
 	//例如下面我自定义的
 	// 1. //format := "{level} - {time} - {position} - {message}"
-	format := "{level} - 时间 {time}  - 位置 {position} - 消息 {message}" //This version was modified from v 1.1.5
+	//format := "{level} - 时间 {time}  - 位置 {position} - 消息 {message}" //This version was modified from v 1.1.5
 ```
 
 #### 2. Console Logger

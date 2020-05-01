@@ -5,6 +5,7 @@
 
 package logker
 
+// banner not used.
 const banner = `
 	 ____ ____ ____ ____ ____ ____
 	||L |||o |||g |||K |||e |||r ||

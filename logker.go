@@ -10,7 +10,7 @@ import (
 )
 
 // This is package version
-const Version = "1.1.7"
+const Version = "1.1.8"
 
 /*
  ____ ____ ____ ____ ____ ____
@@ -26,6 +26,12 @@ LogKer是Golang语言的日志操作库.
 */
 
 // Build console Logger
+/*
+ lev : Logging level
+ zone : Logging time zone
+ formatting : Logging format template string
+ at : AsyncTask Pointer
+*/
 func NewClog(lev level, zone logTimeZone, formatting string, at *AsyncTask) (Logger, error) {
 	consoleLog := &console{
 		// Level: logger Level
@@ -45,6 +51,17 @@ func NewClog(lev level, zone logTimeZone, formatting string, at *AsyncTask) (Log
 }
 
 // Build File logger
+/*
+ lev : Logging level
+ zone : Logging time zone
+ formatting : Logging format template string
+ at : AsyncTask Pointer
+ wheErr : Whether To Open A Separate ErrorFile
+ dir : Logging file output directory
+ fileName : Logging Name
+ size : File size
+ power : File system power
+*/
 func NewFlog(lev level, wheErr bool, zone logTimeZone, dir string, fileName string, size int64, power os.FileMode, formatting string, at *AsyncTask) (Logger, error) {
 	fg := &fileLog{
 		// logLevel:    lev,        logging level

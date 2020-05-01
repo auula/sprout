@@ -26,8 +26,7 @@ type console struct {
 	asyncTask  *AsyncTask
 }
 
-
-
+// Initialize Time
 func (c *console) initTime() {
 	// set customize time zone
 	c.tz = &timeZone{TimeZoneStr: c.timeZone}
