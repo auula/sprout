@@ -19,12 +19,12 @@ Console Logging :
   func main() {
 		// Custom logging message template
 		format := "{level} - 时间 {time}  - 位置 {position} - 消息 {message}"
-    	// Create Log Buffer
-    	task := klog.InitAsync(klog.Qs1w)
+    		// Create Log Buffer
+    		task := klog.InitAsync(klog.Qs1w)
 		log,e := klog.NewClog(klog.DEBUG, klog.Shanghai,format,task)
  		if e != nil{
-        	// .... Custom Operation
-    	}
+        		// .... Custom Operation
+    		}
 		// Analog output log
 		for {
 			log.Debug("DEBUG %s","自定义日志消息匹配符测试")
@@ -62,10 +62,10 @@ File Logging :
  		// klog.MB100	= 100MB
 		format := "{level} - DATE {time}  - POS {position} - MSG {message}"
 		// Create Log Buffer
-    	task := klog.InitAsync(klog.Qs1w)
+    		task := klog.InitAsync(klog.Qs1w)
    		flog,e := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777,format,task)
-    	if e != nil{
-       	    // .... Custom Operation
+    		if e != nil{
+       	    		// .... Custom Operation
    		}
 		// Analog output log
 		for {
