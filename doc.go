@@ -65,7 +65,7 @@ File Logging :
     		task := klog.InitAsync(klog.Qs1w)
    		flog,e := klog.NewFlog(klog.DEBUG, true, klog.Shanghai, dir, "log", 10*1024, 0777,format,task)
     		if e != nil{
-       	    		// .... Custom Operation
+       	    		// ... Custom Operation
    		}
 		// Analog output log
 		for {
