@@ -5,6 +5,7 @@ Copyright (c) 2020 SDing <deen.job@qq.com>
 
 Open Source: MIT License.
 
+Use Video : https://www.bilibili.com/video/BV1WZ4y1s7zD?t=2
 
 The simplest way to use LogKer is simply the package-level exported logger:
 
