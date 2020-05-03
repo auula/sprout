@@ -13,6 +13,9 @@ LogKer</code> It's a log Library of Golang. It's easy to use.👨‍💻‍</p>
 
 ---
 
+## Video link
+- [哔哩哔哩](https://www.bilibili.com/video/BV1WZ4y1s7zD?t=2)
+
 ## Features
 
 - Support file backup.
