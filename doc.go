@@ -1,7 +1,7 @@
 /*
 LogKer  for Golang simple  logging library.
 
-Copyright (c) 2020 HigKer <deen.job@qq.com>
+Copyright (c) 2020 SDing <deen.job@qq.com>
 
 Open Source: MIT License.
 
