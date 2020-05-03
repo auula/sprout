@@ -13,6 +13,10 @@ LogKer</code> 是一个Golang小型简单易用的日志库.👨‍💻‍</p>
 
 ---
 
+
+## 视频链接
+- [哔哩哔哩](https://www.bilibili.com/video/BV1WZ4y1s7zD?t=2)
+
 ## 特性&简介🌲
 
 - 支持文件自动备份。
