@@ -9,6 +9,7 @@ import (
 	"github.com/fatih/color"
 	"runtime"
 	"strings"
+	"time"
 )
 
 // Channel Buffer Size
@@ -48,27 +49,31 @@ func (c *console) begin() {
 // Asynchronous Output Logging Tasks
 func (c *console) asyncOutPutTask() {
 	for {
-		msg := <-c.asyncTask.logQueue
-		switch msg.level {
-		case DEBUG:
-			// blue color of log message.
-			// format log message output console.
-			color.Blue(c.parsePacket(msg))
-		case INFO:
-			color.Green(c.parsePacket(msg))
-		case WARNING:
-			color.Yellow(c.parsePacket(msg))
-		case ERROR:
-			color.Red(c.parsePacket(msg))
+		select {
+		case msg := <-c.asyncTask.logQueue:
+			switch msg.level {
+			case DEBUG:
+				// blue color of log message.
+				// format log message output console.
+				color.Blue(c.parsePacket(msg))
+			case INFO:
+				color.Green(c.parsePacket(msg))
+			case WARNING:
+				color.Yellow(c.parsePacket(msg))
+			case ERROR:
+				color.Red(c.parsePacket(msg))
+			default:
+				// Log Level Type Error
+				// Program automatically set to debug
+				color.Red("-----------------------------------------------------------------")
+				color.Red("！！！Log Level Type Error,Program automatically set to debug！！！")
+				color.Red("-----------------------------------------------------------------")
+				c.logLevel = DEBUG
+				// recursion
+				c.sendMsg(c.pack(ERROR, "Log Level Type Error,Program automatically set to debug！！！"))
+			}
 		default:
-			// Log Level Type Error
-			// Program automatically set to debug
-			color.Red("-----------------------------------------------------------------")
-			color.Red("！！！Log Level Type Error,Program automatically set to debug！！！")
-			color.Red("-----------------------------------------------------------------")
-			c.logLevel = DEBUG
-			// recursion
-			c.sendMsg(c.pack(ERROR, "Log Level Type Error,Program automatically set to debug！！！"))
+			time.Sleep(time.Second)
 		}
 	}
 }

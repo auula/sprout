@@ -7,6 +7,7 @@ package logker
 
 import (
 	"strings"
+	"time"
 )
 
 const (
@@ -30,25 +31,30 @@ func (f *fileLog) begin() {
 // Asynchronous Output Logging Tasks
 func (f *fileLog) asyncOutPutTask() {
 	for {
-		msg := <-f.asyncTask.logQueue
-		if f.checkSize() {
-			// division file
-			f.divisionLogFile(plain)
-		}
-		_, _ = f.file.WriteString(f.parsePacket(msg))
-		// 如果是error单独文件开启就执行
-		// zh_CN:	检测error独立文件输出开关是否开启 如果开启就往error独立文件输出内容
-		// usa_EN:	Check whether the error independent file output switch is turned on.
-		// If it is turned on, output the content to the error independent file
-		if msg.level == ERROR {
-			if f.checkErrSize() {
-				// division error file
-				f.divisionLogFile(major)
+		select {
+		case msg := <-f.asyncTask.logQueue:
+			if f.checkSize() {
+				// division file
+				f.divisionLogFile(plain)
 			}
-			if f.isEnableErr() {
-				_, _ = f.errFile.WriteString(f.parsePacket(msg))
+			_, _ = f.file.WriteString(f.parsePacket(msg))
+			// 如果是error单独文件开启就执行
+			// zh_CN:	检测error独立文件输出开关是否开启 如果开启就往error独立文件输出内容
+			// usa_EN:	Check whether the error independent file output switch is turned on.
+			// If it is turned on, output the content to the error independent file
+			if msg.level == ERROR {
+				if f.checkErrSize() {
+					// division error file
+					f.divisionLogFile(major)
+				}
+				if f.isEnableErr() {
+					_, _ = f.errFile.WriteString(f.parsePacket(msg))
+				}
 			}
+		default:
+			time.Sleep(time.Second)
 		}
+
 	}
 }
 
