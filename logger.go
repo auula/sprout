@@ -57,13 +57,13 @@ func Info(value string, arg ...interface{}) {
 	Log.Info(value, arg)
 }
 func Debug(value string, arg ...interface{}) {
-	Log.Info(value, arg)
+	Log.Debug(value, arg)
 }
 func Error(value string, arg ...interface{}) {
-	Log.Info(value, arg)
+	Log.Error(value, arg)
 }
 func Warning(value string, arg ...interface{}) {
-	Log.Info(value, arg)
+	Log.Warning(value, arg)
 }
 
 func init() {
