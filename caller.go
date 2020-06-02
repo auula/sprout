@@ -12,17 +12,18 @@ import (
 )
 
 // Runtime caller skip
-const (
-	skip = 3
+var (
+	SKIP = 3
 )
 
 // Gets The Program Caller Location
-func buildCallerStr(skip int) string {
-	pc, file, line, ok := runtime.Caller(skip)
+func buildCallerStr() string {
+	pc, file, line, ok := runtime.Caller(SKIP)
 	if !ok {
 		panic("error runtime caller.")
 	}
 	// get function name
+
 	funName := runtime.FuncForPC(pc).Name()
 	// file path
 	filePath := path.Base(file)

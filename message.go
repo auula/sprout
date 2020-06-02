@@ -5,7 +5,7 @@
 
 package logker
 
-// This Was Added To v1.1.6
+// This Was Added To v1.2.1
 // Log Message Packet
 type message struct {
 	level   level
@@ -17,10 +17,10 @@ type message struct {
 
 // Package Log Messages
 func (c *console) pack(lev level, msg string) *message {
-	return &message{level: lev, logTime: c.tz.NowTimeStr(), msg: msg, caller: buildCallerStr(skip), format: c.formatting}
+	return &message{level: lev, logTime: c.tz.NowTimeStr(), msg: msg, caller: buildCallerStr(), format: c.formatting}
 }
 
 // Package Log Messages
 func (f *fileLog) pack(lev level, msg string) *message {
-	return &message{level: lev, logTime: f.tz.NowTimeStr(), msg: msg, caller: buildCallerStr(skip), format: f.formatting}
+	return &message{level: lev, logTime: f.tz.NowTimeStr(), msg: msg, caller: buildCallerStr(), format: f.formatting}
 }

@@ -74,9 +74,8 @@ func Warning(value string, arg ...interface{}) {
 }
 
 func init() {
-	// Custom logging message template
-	format := "{level} - Time {time}  - Position {position} - Message {message}"
-	logger, err := NewClog(DEBUG, Shanghai, format, InitAsync(Qs3w))
+	logger, err := NewClog(DEBUG, Shanghai, DefaultFormat, InitAsync(Qs3w))
+	SKIP = 5
 	if err != nil {
 		panic("init logger failed !!")
 	}
