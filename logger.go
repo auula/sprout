@@ -39,6 +39,9 @@ const (
 	YB
 )
 
+// Log logger
+var Log Logger
+
 type Logger interface {
 	// Info level log
 	Info(value string, arg ...interface{})
@@ -48,6 +51,29 @@ type Logger interface {
 	Error(value string, arg ...interface{})
 	// Warning level log
 	Warning(value string, arg ...interface{})
+}
+
+func Info(value string, arg ...interface{}) {
+	Log.Info(value, arg)
+}
+func Debug(value string, arg ...interface{}) {
+	Log.Info(value, arg)
+}
+func Error(value string, arg ...interface{}) {
+	Log.Info(value, arg)
+}
+func Warning(value string, arg ...interface{}) {
+	Log.Info(value, arg)
+}
+
+func init() {
+	// Custom logging message template
+	format := "{level} - Time {time}  - Position {position} - Message {message}"
+	logger, err := NewClog(DEBUG, Shanghai, format, InitAsync(Qs3w))
+	if err != nil {
+		panic("init logger failed !!")
+	}
+	Log = logger
 }
 
 // TODO: Logging level to string
