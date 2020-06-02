@@ -53,15 +53,22 @@ type Logger interface {
 	Warning(value string, arg ...interface{})
 }
 
+// Info level log
 func Info(value string, arg ...interface{}) {
 	Log.Info(value, arg)
 }
+
+// Debug level log
 func Debug(value string, arg ...interface{}) {
 	Log.Debug(value, arg)
 }
+
+// Error level log
 func Error(value string, arg ...interface{}) {
 	Log.Error(value, arg)
 }
+
+// Warning level log
 func Warning(value string, arg ...interface{}) {
 	Log.Warning(value, arg)
 }
