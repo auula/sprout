@@ -10,7 +10,7 @@ import (
 )
 
 // This is package version
-const Version = "1.1.9"
+const Version = "1.2.2"
 
 /*
  ____ ____ ____ ____ ____ ____

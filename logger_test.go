@@ -14,3 +14,25 @@ func TestSize(t *testing.T) {
 	t.Log(GB)
 	t.Log(TB)
 }
+
+func TestInfo(t *testing.T) {
+	Error("test %d", 1)
+}
+
+func Test_level_toStr(t *testing.T) {
+	tests := []struct {
+		name string
+		lev  level
+		want string
+	}{
+		{name: "DEBUG", lev: DEBUG, want: DEBUG.toStr()},
+		{name: "ERROR", lev: ERROR, want: DEBUG.toStr()},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.lev.toStr(); got != tt.want {
+				t.Errorf("toStr() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

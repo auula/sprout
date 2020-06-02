@@ -75,7 +75,7 @@ func Warning(value string, arg ...interface{}) {
 
 func init() {
 	logger, err := NewClog(DEBUG, Shanghai, DefaultFormat, InitAsync(Qs3w))
-	SKIP = 5
+	SKIP = 4
 	if err != nil {
 		panic("init logger failed !!")
 	}
