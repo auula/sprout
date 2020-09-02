@@ -28,7 +28,7 @@ type Logging interface {
 
 // IOW  io standard
 type IOW interface {
-	Writer()
+	Writer(lg *LogItem)
 }
 
 // LogItem logging message item
@@ -36,6 +36,15 @@ type LogItem struct {
 	time     *time.Time
 	Line     int64
 	FuncName string
-	FileName string
+	FilePath string
 	Level    level
+}
+
+func packMsg(funcName, filePath, timeStr string, Line int, lev level) *LogItem {
+	return &LogItem{
+		Line:     line,
+		FuncName: funcName,
+		FilePath: filePath,
+		Level:    lev,
+	}
 }
