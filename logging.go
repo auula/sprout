@@ -40,7 +40,7 @@ type LogItem struct {
 	Level    level
 }
 
-func packMsg(funcName, filePath, timeStr string, Line int, lev level) *LogItem {
+func packMsg(f uncName, filePath, timeStr string, Line int, lev level) *LogItem {
 	return &LogItem{
 		Line:     line,
 		FuncName: funcName,
