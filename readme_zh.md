@@ -1,5 +1,4 @@
 <p align="center">
-    <a href="https://github.com/Higker/logker/"><img src="https://i.loli.net/2020/04/18/9JnSbmkist8dUaC.png" width="128"/></a>
     <h1 align="center">LogKer</h1>
 </p>
 <p align="center"><code>
