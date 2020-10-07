@@ -1,5 +1,4 @@
 <p align="center">
-    
     <h1 align="center">LogKer</h1>
 </p>
 <p align="center"><code>
