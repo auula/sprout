@@ -15,8 +15,8 @@ import (
 )
 
 const (
-	// Error File Perfix
-	errPerfix = "error_"
+	// Error File Prefix
+	errPrefix = "error_"
 	// File Perfix
 	suffix = ".log"
 	// Backup File Suffix
