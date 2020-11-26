@@ -62,7 +62,7 @@ type fileLog struct {
 
 // Initialization error file pointer
 func (f *fileLog) initErrPtr() *os.File {
-	savePath := path.Join(f.directory, errPerfix+f.fileName+suffix)
+	savePath := path.Join(f.directory, errPrefix+f.fileName+suffix)
 	file, e := os.OpenFile(savePath, os.O_CREATE|os.O_APPEND|os.O_RDWR, f.power)
 	if e != nil {
 		panic("open file fail :" + savePath)
@@ -139,8 +139,8 @@ func (f *fileLog) divisionLogFile(fileType logFileType) {
 		f.file = f.initFilePtr()
 	case major:
 		_ = f.errFile.Close()
-		srcPath := path.Join(f.directory, errPerfix+f.fileName+suffix)
-		newPath := path.Join(f.directory, errPerfix+f.tz.NowTimeStrLogName()+bakSuffix)
+		srcPath := path.Join(f.directory, errPrefix+f.fileName+suffix)
+		newPath := path.Join(f.directory, errPrefix+f.tz.NowTimeStrLogName()+bakSuffix)
 		_ = os.Rename(srcPath, newPath)
 		f.errFile = f.initErrPtr()
 	default:
