@@ -49,6 +49,7 @@ func (c *console) begin() {
 // Asynchronous Output Logging Tasks
 func (c *console) asyncOutPutTask() {
 	for {
+		<-c.asyncTask.sync
 		select {
 		case msg := <-c.asyncTask.logQueue:
 			switch msg.level {
@@ -75,6 +76,7 @@ func (c *console) asyncOutPutTask() {
 		default:
 			time.Sleep(time.Second)
 		}
+		c.asyncTask.sync <- true
 	}
 }
 
