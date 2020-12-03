@@ -27,10 +27,13 @@ type Async interface {
 type AsyncTask struct {
 	queueSize int64
 	logQueue  chan *message
+	sync      chan bool
 }
 
 // Initializes The Logging Producer Channel Buffer
 // Queue Size Data Type int64
 func InitAsync(queueSize int64) *AsyncTask {
-	return &AsyncTask{queueSize: queueSize, logQueue: make(chan *message, queueSize)}
+	at := &AsyncTask{queueSize: queueSize, logQueue: make(chan *message, queueSize), sync:make(chan bool, 1)}
+	at.sync <- true
+	return at
 }
