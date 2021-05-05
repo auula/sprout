@@ -1,5 +1,3 @@
-module github.com/higker/logker
+module github.com/higker/sprout
 
-go 1.11
-
-require github.com/fatih/color v1.9.0
+go 1.16
